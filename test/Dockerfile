@@ -11,3 +11,4 @@ USER testuser
 WORKDIR /home/testuser
 ENV HOME=/home/testuser
 
+COPY validate_environment.sh /home/testuser
