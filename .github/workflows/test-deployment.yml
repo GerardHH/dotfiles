@@ -1,0 +1,46 @@
+name: Test dotfiles deployment
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Podman
+        run: sudo apt-get update && sudo apt-get install -y podman
+
+      - name: Build test container
+        env:
+          REPO_PATH: ${{ github.workspace }}
+        run: exit 0; ./util/test_build.sh
+
+      - name: Setup up secrets
+        env:
+          HALLO_SECRET: ${{ secrets.HALLO_SECRET }}
+          HALLO_PUBLIC: ${{ secrets.HALLO_PUBLIC }}
+        run: |
+          echo "${HALLO_SECRET}" >> test.env
+          echo "${HALLO_PUBLIC}" >> test.env
+          cat test.env
+          echo "GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}" >> .env
+          echo "GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}" >> .env
+          chmod 600 .env
+
+      - name: Test pre installed deployment
+        run: ./util/test_run_pre_installed.sh
+
+      - name: Test root less deployment
+        if: github.ref == 'refs/heads/main'
+        run: ./util/test_run.sh
+
+      - name: Clean up
+        if: always()
+        run: |
+          test -f .env && shred -u .env
