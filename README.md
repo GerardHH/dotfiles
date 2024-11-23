@@ -1,2 +1,4 @@
-# dotfiles
-Portable development environment
+# Portable development environment
+## Dependancies
+* git
+* Podman (for testing)
