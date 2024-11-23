@@ -1,0 +1,2 @@
+#Always ignore environment files
+*.env
