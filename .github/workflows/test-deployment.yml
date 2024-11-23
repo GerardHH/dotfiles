@@ -1,0 +1,26 @@
+name: Test dotfiles deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkokut code
+        uses: actions/checkout@v3
+
+      - name: Set up Podman
+        run: sudo apt-get update && sudo apt-get install -y podman
+
+      - name: Build test container
+        env:
+          TEST_PATH: ${{ github.workspace }}/test
+        run: ./test/build_test_container.sh
+
+      - name: Validate environment
+        run: podman run --rm dotfiles-test ./validate_environment.sh 
