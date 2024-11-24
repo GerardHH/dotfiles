@@ -2,7 +2,10 @@ FROM debian:latest
 
 # Install dependancies
 RUN apt-get update && apt-get install -y \
+	build-essential \
+	curl \
 	git \
+	procps \
 	&& apt-get clean
 
 # Setup test user
@@ -11,4 +14,8 @@ USER testuser
 WORKDIR /home/testuser
 ENV HOME=/home/testuser
 
-COPY validate_environment.sh /home/testuser
+COPY \
+	setup.sh \
+	source_brew.sh \
+	validate_environment.sh \
+	/home/testuser
