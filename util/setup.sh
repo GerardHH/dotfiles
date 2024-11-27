@@ -26,5 +26,14 @@ setup_chezmoi() {
 	brew install chezmoi
 }
 
+clone_repo() {
+    test -d $HOME/.local/share/chezmoi && return 0
+
+    chezmoi init \
+        --branch=set-up-git-config-files \
+        https://github.com/GerardHH/dotfiles.git
+}
+
 setup_brew
 setup_chezmoi
+clone_repo
