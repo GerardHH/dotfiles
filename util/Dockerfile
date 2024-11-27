@@ -17,5 +17,5 @@ ENV HOME=/home/testuser
 COPY \
 	setup.sh \
 	source_brew.sh \
-	validate_environment.sh \
+	validate.sh \
 	/home/testuser

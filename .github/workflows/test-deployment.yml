@@ -22,5 +22,5 @@ jobs:
           REPO_PATH: ${{ github.workspace }}
         run: ./util/build_test_container.sh
 
-      - name: Setup & validate environment
-        run: podman run --rm --entrypoint /bin/sh dotfiles-test -c "./setup.sh && ./validate_environment.sh"
+      - name: Test deployment
+        run: ./util/test_run.sh
