@@ -20,7 +20,7 @@ jobs:
       - name: Build test container
         env:
           REPO_PATH: ${{ github.workspace }}
-        run: ./util/build_test_container.sh
+        run: ./util/test_build.sh
 
       - name: Test deployment
         run: ./util/test_run.sh
