@@ -8,3 +8,5 @@ DIR=$(dirname "$(readlink -f "$0")")
 command -v brew && \
 	brew install hello && \
 	hello
+
+command -v chezmoi
