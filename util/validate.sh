@@ -10,3 +10,4 @@ command -v brew && \
 	hello
 
 command -v chezmoi
+test -d "$HOME/.local/share/chezmoi"
