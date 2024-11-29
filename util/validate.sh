@@ -11,3 +11,5 @@ command -v brew && \
 
 command -v chezmoi
 test -d "$HOME/.local/share/chezmoi"
+
+test -f $HOME/.gitconfig
