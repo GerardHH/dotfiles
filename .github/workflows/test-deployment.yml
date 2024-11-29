@@ -1,0 +1,26 @@
+name: Test dotfiles deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Podman
+        run: sudo apt-get update && sudo apt-get install -y podman
+
+      - name: Build test container
+        env:
+          REPO_PATH: ${{ github.workspace }}
+        run: ./util/test_build.sh
+
+      - name: Test deployment
+        run: ./util/test_run.sh
