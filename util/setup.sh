@@ -23,6 +23,7 @@ setup_brew() {
 
 setup_chezmoi() {
     command -v chezmoi && return 0
+    command -v gpg || exit $?
 
 	brew install chezmoi
 }

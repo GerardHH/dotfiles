@@ -4,6 +4,7 @@ This repo is my personal development environment which means it will not work fo
 * build-essential
 * curl
 * git
+* gpg (for encryption, currently installs fullblown linux distro through brew)
 * procps
 Testing:
 * podman
