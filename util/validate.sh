@@ -13,3 +13,5 @@ command -v chezmoi
 test -d "$HOME/.local/share/chezmoi"
 
 test -f $HOME/.gitconfig
+test -f $HOME/.gitconfig.private
+test -f $HOME/.gitconfig.lely
