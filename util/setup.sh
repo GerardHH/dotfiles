@@ -17,13 +17,22 @@ setup_brew() {
 	fi
 
 	export HOMEBREW_NO_ENV_HINTS=1
-    export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
-    eval "$($BREW_PREFIX/bin/brew shellenv)"
+	export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
+	eval "$($BREW_PREFIX/bin/brew shellenv)"
+}
+
+setup_perl() {
+	command -v cpanm && return 0
+
+	brew install \
+		cpanm
+
+	cpanm IPC::Cmd
 }
 
 setup_chezmoi() {
-    command -v chezmoi && return 0
-    command -v gpg || exit $?
+	command -v chezmoi && return 0
+	command -v gpg || exit $?
 
 	brew install chezmoi
 }
@@ -38,5 +47,6 @@ run_chezmoi() {
 }
 
 setup_brew
+setup_perl
 setup_chezmoi
 run_chezmoi
