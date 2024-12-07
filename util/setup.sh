@@ -5,15 +5,15 @@ set -ex
 setup_brew_pre_installed() {
 	command -v brew && return 0
 
-	BREW_PREFIX=/home/linuxbrew/.linuxbrew/Homebrew
+	BREW_PREFIX=/home/linuxbrew/.linuxbrew
 
-	if [ ! -d $BREW_PREFIX ]; then
+	if [ ! -d $BREW_PREFIX/Homebrew ]; then
 		return 0
 	fi
 
 	export HOMEBREW_NO_ENV_HINTS=1
-	export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
-	eval "$($BREW_PREFIX/bin/brew shellenv)"
+	export PATH="$BREW_PREFIX/Homebrew/bin:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
+	eval "$(brew shellenv)"
 }
 
 setup_brew_rootless() {
@@ -31,8 +31,8 @@ setup_brew_rootless() {
 	fi
 
 	export HOMEBREW_NO_ENV_HINTS=1
-	export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
-	eval "$($BREW_PREFIX/bin/brew shellenv)"
+	export PATH="$BREW_PREFIX/Homebrew/bin:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
+	eval "$(brew shellenv)"
 }
 
 setup_perl() {
