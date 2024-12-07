@@ -2,7 +2,21 @@
 
 set -ex
 
-setup_brew() {
+setup_brew_pre_installed() {
+	command -v brew && return 0
+
+	BREW_PREFIX=/home/linuxbrew/.linuxbrew/Homebrew
+
+	if [ ! -d $BREW_PREFIX ]; then
+		return 0
+	fi
+
+	export HOMEBREW_NO_ENV_HINTS=1
+	export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
+	eval "$($BREW_PREFIX/bin/brew shellenv)"
+}
+
+setup_brew_rootless() {
 	command -v brew && return 0
 
 	dpkg-query -W -f='${status}\n' build-essential || exit $?
@@ -46,7 +60,8 @@ run_chezmoi() {
         https://github.com/GerardHH/dotfiles.git
 }
 
-setup_brew
+setup_brew_pre_installed
+setup_brew_rootless
 setup_perl
 setup_chezmoi
 run_chezmoi

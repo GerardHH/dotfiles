@@ -22,5 +22,8 @@ jobs:
           REPO_PATH: ${{ github.workspace }}
         run: ./util/test_build.sh
 
-      - name: Test deployment
+      - name: Test pre installed deployment
+        run: ./util/test_run_pre_installed.sh
+
+      - name: Test root less deployment
         run: ./util/test_run.sh
