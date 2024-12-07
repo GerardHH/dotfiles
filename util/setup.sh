@@ -51,6 +51,12 @@ setup_chezmoi() {
 	brew install chezmoi
 }
 
+setup_bitwarden() {
+	command -v bw && return 0
+
+	brew install bitwarden-cli
+}
+
 run_chezmoi() {
     test -d $HOME/.local/share/chezmoi && return 0
 
@@ -64,4 +70,5 @@ setup_brew_pre_installed
 setup_brew_rootless
 setup_perl
 setup_chezmoi
+setup_bitwarden
 run_chezmoi
