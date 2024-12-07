@@ -9,7 +9,8 @@ See `util/Dockerfile` and `util/pre_installed.Dockerfile` for all details, but h
 * procps
 Testing:
 * podman
-Optional (will speed up `util/setup.sh` performance):
-* homebrew (`util/setup.sh` will install rootlessly if missing)
+Optional (`util/setup.sh` will install rootlessly if missing):
+* homebrew 
+* bitwarden-cli
 ## Setup
 Download `util/setup.sh` and execute. Use `util/validate.sh` to see if the setup was successful. 
