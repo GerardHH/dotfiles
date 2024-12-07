@@ -3,8 +3,7 @@ name: Test dotfiles deployment
 on:
   push:
     branches:
-      - main
-  pull_request:
+      - '*'
 
 jobs:
   test-deployment:
@@ -26,4 +25,5 @@ jobs:
         run: ./util/test_run_pre_installed.sh
 
       - name: Test root less deployment
+        if: github.ref == 'refs/heads/main'
         run: ./util/test_run.sh
