@@ -52,9 +52,28 @@ setup_chezmoi() {
 }
 
 setup_bitwarden() {
-	command -v bw && return 0
+	command -v bw || brew install bitwarden-cli
+	command -v jq || brew install jq
 
-	brew install bitwarden-cli
+	if  bw status | jq -e '.status' | grep 'unauthenticated'; then
+		if [ -z "$BW_CLIENTID" ] || [ -z "$BW_CLIENTSECRET" ]; then
+			bw login
+		else
+			bw login --apikey
+		fi
+	fi
+
+	BW_SESSION=$(bw unlock --raw)
+}
+
+setup_gpg() {
+	command -v bw || exit 1
+	command -v gpg || exit 1
+
+	test -z "$BW_SESSION" && return 1
+
+	GPG_TTY=$(tty)
+	bw get notes "GPG Private Key - gh.heshusius@gmail.com" --session "$BW_SESSION" | gpg --import
 }
 
 run_chezmoi() {
@@ -71,4 +90,5 @@ setup_brew_rootless
 setup_perl
 setup_chezmoi
 setup_bitwarden
+setup_gpg
 run_chezmoi
