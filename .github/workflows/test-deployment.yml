@@ -20,5 +20,16 @@ jobs:
           REPO_PATH: ${{ github.workspace }}
         run: ./util/container/build.sh
 
+      - name: Setup up secrets
+        run: |
+          echo "GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}" >> .env
+          echo "GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}" >> .env
+          chmod 600 .env
+
       - name: Test deployment
         run: ./util/container/run.sh
+
+      - name: Clean up
+        if: always()
+        run: |
+          test -f .env && shred -u .env
