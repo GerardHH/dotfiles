@@ -7,4 +7,4 @@ podman run \
 	--env-file .env \
 	--rm \
 	dotfiles-test \
-	-c "./bootstrap.sh"
+	-c "./bootstrap.sh; ./dotfiles/util/validate.sh"
