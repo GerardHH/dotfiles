@@ -7,13 +7,18 @@ fi
 
 export BREW_PREFIX=/home/linuxbrew/.linuxbrew
 
-if [ ! -d $BREW_PREFIX ]; then
+if [[ ! -d "${BREW_PREFIX}" ]]; then
 	echo "Error: brew not installed, please use official brew installation"
 	exit 1
 fi
 
+if [[ -z "${UTIL_DIR}" ]]; then
+    echo "Error: UTIL_DIR not set"
+    exit 1
+fi
+
 echo "Source brew"
-source "$UTIL_DIR"/source_brew.sh
+source "${UTIL_DIR}"/source_brew.sh
 
 echo "Setup Perl dependencies"
 if ! command -v cpanm; then
