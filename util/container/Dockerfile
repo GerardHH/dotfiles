@@ -16,6 +16,9 @@ USER testuser
 WORKDIR /home/testuser
 ENV HOME=/home/testuser
 
+#Simulate existing .config folder
+RUN mkdir .config
+
 # Install homebrew as testuser
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
