@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Child setup scripts are sourced so that exported variables are available for the next child.
+export ROOT_DIR="$HOME"/dotfiles
+export UTIL_DIR="$ROOT_DIR"/util
+
 execute_scripts() {
 	if [ "$#" -eq 0 ]; then
 		echo "Error: No folder provided"
@@ -9,6 +11,8 @@ execute_scripts() {
 	fi
 
 	local scripts_dir=$1
+
+    echo "Run scripts in '$scripts_dir'"
 
 	for script in "$scripts_dir"/*; do
 		echo "- $script:"
@@ -33,7 +37,7 @@ execute_scripts() {
 			continue
 		fi
 
-		source "$script"
+		"$script"
 
 		RESULT=$?
 		if [ $RESULT -ne 0 ]; then

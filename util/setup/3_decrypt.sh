@@ -2,26 +2,26 @@
 
 if ! command -v gpg; then
     echo "Error: gpg command not found"
-    return 1
+    exit 1
 fi
 
 if [[ ! -n $(gpg --list-secret-keys ) ]]; then
     echo "Error: gpg doesn't have any private keys"
-    return 1
+    exit 1
 fi
 
 if [ -z "$GPG_PASSPHRASE" ]; then
 	echo "Error: Empty GPG_PASSPHRASE, please set it securily"
-	return 1
+	exit 1
 fi
 
-if [ -z "$REPO_ROOT" ]; then
-    echo "Error: REPO_ROOT not set"
-    return 1
+if [ -z "$ROOT_DIR" ]; then
+    echo "Error: ROOT_DIR not set"
+    exit 1
 fi
 
-SOURCE_DIR="$REPO_ROOT"/encrypted
-TARGET_DIR="$REPO_ROOT"/home
+SOURCE_DIR="$ROOT_DIR"/encrypted
+TARGET_DIR="$ROOT_DIR"/home
 
 echo "Source dir: $SOURCE_DIR"
 echo "Target dir: $TARGET_DIR"

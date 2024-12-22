@@ -2,7 +2,7 @@
 
 if ! command -v bw; then
 	echo "Error: Could not find bitwarden cli (bw), please install it or set PATH correctly"
-	return 1
+	exit 1
 fi
 
 bw login

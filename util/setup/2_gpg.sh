@@ -2,20 +2,20 @@
 
 if ! command -v gpg; then
 	echo "Error: gpg command not found"
-	return 1
+	exit 1
 fi
 
-if [ -z "$REPO_ROOT" ]; then
-    echo "Warning: REPO_ROOT not set"
+if [ -z "$ROOT_DIR" ]; then
+    echo "Warning: ROOT_DIR not set"
 fi
 
-if [ -f "$REPO_ROOT"/.env ]; then
-	source "$REPO_ROOT"/.env
+if [ -f "$ROOT_DIR"/.env ]; then
+	source "$ROOT_DIR"/.env
 fi
 
 if [ -z "$GPG_PRIVATE_KEY" ]; then
 	echo "Error: No GPG_PRIVATE_KEY set, please set it manually or use setup_secrets.sh"
-	return 1
+	exit 1
 fi
 
 echo "Import private key"
@@ -27,7 +27,7 @@ echo "Set trust level"
 KEY_ID=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr/{print $10}')
 if [ -z "$KEY_ID" ]; then
 	echo "Error: Could not extract key ID"
-	return 1
+	exit 1
 fi
 
 # Set the trust level
