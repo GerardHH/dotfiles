@@ -12,7 +12,7 @@ execute_scripts() {
 
 	local scripts_dir=$1
 
-    echo "Run scripts in '${scripts_dir}'"
+	echo "Run scripts in '${scripts_dir}'"
 
 	for script in "${scripts_dir}"/*; do
 		echo "- ${script}:"
@@ -24,11 +24,6 @@ execute_scripts() {
 
 		if [[ ! -f "${script}" ]]; then
 			echo "Skipping: Not a regular file"
-			continue
-		fi
-
-		if [[ "$(stat -c '%U' "${script}")" != "$(whoami)" ]]; then
-			echo "Skipping: User executing this, doesn't own script"
 			continue
 		fi
 
