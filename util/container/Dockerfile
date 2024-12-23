@@ -7,6 +7,7 @@ RUN apt update && apt upgrade && apt install -y \
     git \
     gnupg \
     procps \
+    xclip \
     && apt clean
 
 # Create homebrew folder and make it available for testuser

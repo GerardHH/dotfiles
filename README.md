@@ -8,6 +8,7 @@ See `util/container/Dockerfile` for all details, but here is a summary:
 * gpg
 * homebrew
 * procps
+* xclip
 Testing:
 * podman
 ## Setup
