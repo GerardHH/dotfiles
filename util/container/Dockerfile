@@ -3,6 +3,7 @@ FROM debian:latest
 RUN apt update && apt upgrade && apt install -y \
     build-essential \
     curl \
+    fontconfig \
     git \
     gnupg \
     procps \
