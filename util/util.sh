@@ -15,7 +15,8 @@ execute_scripts() {
 	echo "Run scripts in '${scripts_dir}'"
 
 	for script in "${scripts_dir}"/*; do
-		echo "- ${script}:"
+        echo "" # New line for my dyslexic ass
+		echo "----- ${script} -----"
 
 		if [[ ! -x "${script}" ]]; then
 			echo "Skipping: Not executable"
@@ -36,9 +37,9 @@ execute_scripts() {
 
 		RESULT=$?
 		if [[ "${RESULT}" -ne 0 ]]; then
-			echo "Failed: ${RESULT}"
+			echo "----- Failed: ${RESULT} -----"
 		else
-			echo "Success!"
+			echo "----- Success! -----"
 		fi
 	done
 }
