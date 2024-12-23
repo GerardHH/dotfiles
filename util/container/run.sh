@@ -1,10 +1,11 @@
 #!/bin/bash
 
-set -ex
+REPO_PATH="${REPO_PATH:-${HOME}/dotfiles}"
 
 podman run \
-	--entrypoint /bin/sh \
+	--entrypoint /bin/bash \
 	--env-file .env \
 	--rm \
-	dotfiles-test \
-	-c "./bootstrap.sh; ./dotfiles/util/validate.sh"
+	-v "${REPO_PATH}":/home/testuser/dotfiles \
+	dotfiles-test:latest \
+	-c "./dotfiles/util/setup.sh; ./dotfiles/util/validate.sh"

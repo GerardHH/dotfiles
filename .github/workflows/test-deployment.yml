@@ -27,7 +27,13 @@ jobs:
           chmod 600 .env
 
       - name: Test deployment
+        env:
+          REPO_PATH: ${{ github.workspace }}
         run: ./util/container/run.sh
+
+      - name: Test deployment using bootstrap.sh
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: ./util/containers/run_bootstrap.sh
 
       - name: Clean up
         if: always()
