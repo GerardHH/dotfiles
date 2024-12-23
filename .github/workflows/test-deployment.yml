@@ -1,0 +1,55 @@
+name: Test dotfiles deployment
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Podman
+        run: sudo apt-get update && sudo apt-get install -y podman
+
+      - name: Build test container
+        env:
+          REPO_PATH: ${{ github.workspace }}
+        run: ./util/container/build.sh
+
+      - name: Setup up secrets
+        run: |
+          echo "GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}" >> .env
+          echo "GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}" >> .env
+          chmod 600 .env
+
+      - name: Test deployment
+        env:
+          REPO_PATH: ${{ github.workspace }}
+        run: ./util/container/run.sh
+
+      - name: Test deployment using bootstrap.sh
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: ./util/containers/run_bootstrap.sh
+
+      - name: Clean up
+        if: always()
+        run: |
+          test -f .env && shred -u .env
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Run ShellCheck on shell scripts
+        env:
+          REPO_PATH: ${{ github.workspace }}
+        run: util/lint.sh
