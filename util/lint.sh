@@ -2,17 +2,19 @@
 
 REPO_PATH="${REPO_PATH:-${HOME}/dotfiles}"
 
+source "${REPO_PATH}"/util/util.sh
+
+
+if [[ -z "${UTIL_DIR}" ]]; then
+    echo "Error: UTIL_DIR not set"
+    exit 1
+fi
+
+source "${UTIL_DIR}"/source_brew.sh
+
 if ! command -v shellcheck; then
     echo "Warning: shellcheck not found, installing..."
 
-    source "${REPO_PATH}"/util/util.sh
-
-    if [[ -z "${UTIL_DIR}" ]]; then
-        echo "Error: UTIL_DIR not set"
-        exit 1
-    fi
-
-    source "${UTIL_DIR}"/source_brew.sh
     brew install shellcheck
 fi
 
