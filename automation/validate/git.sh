@@ -10,12 +10,12 @@ if [[ ! -L "${HOME}"/.gitconfig ]]; then
 	exit 1
 fi
 
-if [[ ! -f "${HOME}"/.gitconfig.private ]]; then
+if [[ ! -L "${HOME}"/.gitconfig.private ]]; then
 	echo "Error: .gitconfig.private not deployed"
 	exit 1
 fi
 
-if [[ ! -f "${HOME}"/.gitconfig.lely ]]; then
+if [[ ! -L "${HOME}"/.gitconfig.lely ]]; then
 	echo "Error: .gitconfig.lely not deployed"
 	exit 1
 fi
