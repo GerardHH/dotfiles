@@ -11,3 +11,8 @@ if ! command -v nvim; then
 	echo "Error: Could not find nvim"
 	exit 1
 fi
+
+if [[ ! -L "${HOME}/.config/nvim" ]]; then
+    echo "Error: .config/nvim not deployed"
+    exit 1
+fi
