@@ -6,7 +6,12 @@ SHELL_LS=("bash-language-server" "shellcheck" "shfmt")
 
 OTHER_DEPS=("fzf" "lazygit" "yazi")
 
-NVIM_DIR="${HOME}/.config/nvim"
+if [[ -z "${HOME_DIR}" ]]; then
+	echo "Error: HOME_DIR not set"
+	exit 2
+fi
+
+NVIM_DIR="${HOME_DIR}/.config/nvim"
 
 if [[ ! -d "${NVIM_DIR}" ]]; then
 	echo "Did not find '${NVIM_DIR}', creating and checking out..."
@@ -33,6 +38,8 @@ if [[ -z "${UTIL_DIR}" ]]; then
 	echo "Error: UTIL_DIR not set"
 	exit 2
 fi
+
+source "${UTIL_DIR}/source_brew.sh"
 
 if ! command -v nvim; then
 	echo "Did not find nvim, installing + dependencies..."

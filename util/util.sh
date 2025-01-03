@@ -1,7 +1,8 @@
 #!/bin/bash
 
-export ROOT_DIR="${HOME}"/dotfiles
-export UTIL_DIR="${ROOT_DIR}"/util
+export ROOT_DIR="${HOME}/dotfiles"
+export HOME_DIR="${ROOT_DIR}/home"
+export UTIL_DIR="${ROOT_DIR}/util"
 
 execute_scripts() {
 	if [[ "$#" -eq 0 ]]; then
