@@ -20,8 +20,8 @@ if [[ -z "${ROOT_DIR}" ]]; then
 	exit 1
 fi
 
-SOURCE_DIR="${ROOT_DIR}"/encrypted
-TARGET_DIR="${HOME}"
+SOURCE_DIR="${ROOT_DIR}/encrypted"
+TARGET_DIR="${ROOT_DIR}/home"
 
 echo "Source dir: ${SOURCE_DIR}"
 echo "Target dir: ${TARGET_DIR}"
