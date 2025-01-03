@@ -3,12 +3,12 @@
 if ! command -v stow; then
     echo "Warning: Cannot find stow, installing..."
 
-    if [[ -z "${UTIL_DIR}" ]]; then
-        echo "Error: UTIL_DIR not set"
+    if [[ -z "${AUTO_DIR}" ]]; then
+        echo "Error: AUTO_DIR not set"
         exit 1
     fi
 
-    source "${UTIL_DIR}"/source_brew.sh
+    source "${AUTO_DIR}"/source_brew.sh
     brew install stow
 fi
 

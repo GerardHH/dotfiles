@@ -2,20 +2,19 @@
 
 REPO_PATH="${REPO_PATH:-${HOME}/dotfiles}"
 
-source "${REPO_PATH}"/util/util.sh
+source "${REPO_PATH}"/automation/util.sh
 
-
-if [[ -z "${UTIL_DIR}" ]]; then
-    echo "Error: UTIL_DIR not set"
-    exit 1
+if [[ -z "${AUTO_DIR}" ]]; then
+	echo "Error: AUTO_DIR not set"
+	exit 1
 fi
 
-source "${UTIL_DIR}"/source_brew.sh
+source "${AUTO_DIR}"/source_brew.sh
 
 if ! command -v shellcheck; then
-    echo "Warning: shellcheck not found, installing..."
+	echo "Warning: shellcheck not found, installing..."
 
-    brew install shellcheck
+	brew install shellcheck
 fi
 
 # Excluded checks:

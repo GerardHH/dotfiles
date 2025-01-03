@@ -12,7 +12,7 @@ See `util/container/Dockerfile` for all details, but here is a summary:
 Testing:
 * podman
 ## Setup
-Download `bootstrap.sh` and execute. Use `util/validate.sh` to see if the setup was successful.
+Download `bootstrap.sh` and execute. Use `automation/validate.sh` to see if the setup was successful.
 ## Secrets
 The decryption uses GPG and requires to have a `.env` file available with the correct secrets setup, use `util/setup_secrets.sh` which uses bitwarden to setup the file.
 Note that `GPG_PRIVATE_KEY` is encoded using `base64 --wrap=0` so that it can be passed around in environment variables.

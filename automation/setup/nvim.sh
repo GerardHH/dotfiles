@@ -34,12 +34,12 @@ else
 	echo "'${NVIM_DIR}' exists"
 fi
 
-if [[ -z "${UTIL_DIR}" ]]; then
-	echo "Error: UTIL_DIR not set"
+if [[ -z "${AUTO_DIR}" ]]; then
+	echo "Error: AUTO_DIR not set"
 	exit 2
 fi
 
-source "${UTIL_DIR}/source_brew.sh"
+source "${AUTO_DIR}/source_brew.sh"
 
 if ! command -v nvim; then
 	echo "Did not find nvim, installing + dependencies..."

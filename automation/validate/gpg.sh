@@ -12,13 +12,13 @@ if [[ -z "$(gpg --list-secret-keys)" ]]; then
     exit 1
 fi
 
-if [[ -z "${UTIL_DIR}" ]]; then
-    echo "Error: UTIL_DIR not set"
+if [[ -z "${AUTO_DIR}" ]]; then
+    echo "Error: AUTO_DIR not set"
     exit 1
 fi
 
-if [[ -f "${UTIL_DIR}"/.env ]]; then
-	source "${UTIL_DIR}"/.env
+if [[ -f "${AUTO_DIR}"/.env ]]; then
+	source "${AUTO_DIR}"/.env
 fi
 
 if [[ -z "${GPG_PASSPHRASE}" ]]; then

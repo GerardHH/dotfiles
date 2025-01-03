@@ -14,7 +14,7 @@ CONTAINER_ID=$(
 		--rm \
 		--entrypoint /bin/bash \
 		"${CONTAINER_NAME}" \
-		-c "${CONTIANER_DIR}/util/setup.sh; ${CONTIANER_DIR}/util/validate.sh"
+		-c "${CONTIANER_DIR}/automation/setup.sh; ${CONTIANER_DIR}/automation/validate.sh"
 )
 
 podman cp "${LOCAL_DIR}" "${CONTAINER_ID}":"${CONTIANER_DIR}"

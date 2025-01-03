@@ -18,7 +18,7 @@ jobs:
       - name: Build test container
         env:
           REPO_PATH: ${{ github.workspace }}
-        run: ./util/container/build.sh
+        run: ./automation/container/build.sh
 
       - name: Setup up secrets
         run: |
@@ -29,11 +29,11 @@ jobs:
       - name: Test deployment
         env:
           REPO_PATH: ${{ github.workspace }}
-        run: ./util/container/run.sh
+        run: ./automation/container/run.sh
 
       - name: Test deployment using bootstrap.sh
         if: ${{ github.ref == 'refs/heads/main' }}
-        run: ./util/containers/run_bootstrap.sh
+        run: ./automation/containers/run_bootstrap.sh
 
       - name: Clean up
         if: always()
@@ -52,4 +52,4 @@ jobs:
       - name: Run ShellCheck on shell scripts
         env:
           REPO_PATH: ${{ github.workspace }}
-        run: util/lint.sh
+        run: automation/lint.sh
