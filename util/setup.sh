@@ -12,6 +12,7 @@
 	SCRIPTS_DIR="${UTIL_DIR}"/setup
 
 	echo "----- Start setup -----"
+	execute_scripts "${SCRIPTS_DIR}/before"
 	execute_scripts "${SCRIPTS_DIR}"
 	execute_scripts "${SCRIPTS_DIR}/after"
 	echo "----- Finished setup -----"
