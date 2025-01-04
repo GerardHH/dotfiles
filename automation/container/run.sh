@@ -3,7 +3,6 @@
 REPO_PATH="${REPO_PATH:-${HOME}/dotfiles}"
 
 CONTAINER_NAME="dotfiles-test:latest"
-LOCAL_DIR="${HOME}/dotfiles"
 CONTIANER_DIR="/home/testuser/dotfiles"
 
 CONTAINER_ID=$(
@@ -17,7 +16,7 @@ CONTAINER_ID=$(
 		-c "${CONTIANER_DIR}/automation/setup.sh; ${CONTIANER_DIR}/automation/validate.sh"
 )
 
-podman cp "${LOCAL_DIR}" "${CONTAINER_ID}":"${CONTIANER_DIR}"
+podman cp "${REPO_PATH}" "${CONTAINER_ID}":"${CONTIANER_DIR}"
 
 podman start \
 	--attach \
