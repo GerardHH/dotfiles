@@ -58,8 +58,3 @@ if ! command -v nvim; then
 else
 	echo "Nvim already installed"
 fi
-
-if ! nvim --headless -c 'Lazy! install' -c 'quitall'; then
-	echo "Error: Lazy did not install plugins"
-	exit 1
-fi
