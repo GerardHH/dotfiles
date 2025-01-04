@@ -1,0 +1,25 @@
+% apt
+
+$ apt_update: echo "sudo apt update"
+$ apt_upgrade: echo "sudo apt upgrade --yes"
+$ apt_autoremove: echo "sudo apt autoremove --yes"
+
+# apt update, upgrade and autoremove
+<apt_update> && <apt_upgrade> && <apt_autoremove>
+
+% nix
+
+$ update_home: echo "nix-channel --update && home-manager switch"
+
+# Update home
+<update_home>
+
+# Remove all broken links
+find . -xtype l -delete
+
+% system
+@ apt
+@ nix
+
+# Update system
+<apt_update> && <apt_upgrade> && <apt_autoremove> && <update_home>
