@@ -11,6 +11,9 @@ See `util/container/Dockerfile` for all details, but here is a summary:
 * xclip
 Testing:
 * podman
+### Terminal emulator
+Install an emulator using the host package manager. Currently the ones that are supported are:
+* alacritty
 ## Setup
 Download `bootstrap.sh` and execute. Use `automation/validate.sh` to see if the setup was successful.
 ## Secrets
