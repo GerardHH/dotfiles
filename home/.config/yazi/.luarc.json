@@ -1,0 +1,14 @@
+{
+    "diagnostics.globals": [
+        "Current",
+        "Header",
+        "Manager",
+        "Parent",
+        "Preview",
+        "Progress",
+        "Status",
+        "cx",
+        "ui",
+        "ya"
+    ]
+}

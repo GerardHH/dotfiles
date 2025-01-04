@@ -1,0 +1,12 @@
+[manager]
+# Split panes in "half", first half shared by parent/current directory, second preview pane
+ratio = [1, 2, 3]
+# Show modified items on the top
+sort_by = "modified"
+sort_reverse = true
+sort_dir_first = true
+
+linemode = "size"
+
+show_hidden = true
+show_symlink = true
