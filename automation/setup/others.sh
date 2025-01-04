@@ -8,4 +8,5 @@ fi
 source "${AUTO_DIR}/source_brew.sh"
 
 brew install \
+	btop \
 	lazydocker
