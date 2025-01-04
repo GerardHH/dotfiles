@@ -4,7 +4,7 @@ CPP_LS=("llvm")
 LUA_LS=("lua-language-server")
 SHELL_LS=("bash-language-server" "shellcheck" "shfmt")
 
-OTHER_DEPS=("fzf" "lazygit" "yazi")
+OTHER_DEPS=("fzf" "lazygit" "ripgrep" "yazi")
 
 if [[ -z "${HOME_DIR}" ]]; then
 	echo "Error: HOME_DIR not set"
