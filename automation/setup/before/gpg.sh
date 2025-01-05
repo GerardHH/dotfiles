@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "${HOME}"/dotfiles/util/util.sh
-
 if ! command -v gpg; then
 	echo "Error: gpg command not found"
 	exit 1
