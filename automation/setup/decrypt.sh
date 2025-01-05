@@ -10,6 +10,14 @@ if [[ -z "$(gpg --list-secret-keys)" ]]; then
 	exit 1
 fi
 
+if [[ -z "${ROOT_DIR}" ]]; then
+	echo "Warning: ROOT_DIR not set"
+fi
+
+if [[ -f "${ROOT_DIR}"/.env ]]; then
+	source "${ROOT_DIR}"/.env
+fi
+
 if [[ -z "${GPG_PASSPHRASE}" ]]; then
 	echo "Error: Empty GPG_PASSPHRASE, please set it securily"
 	exit 1
