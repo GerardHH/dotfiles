@@ -1,6 +1,11 @@
 #Always ignore environment files
 *.env
 
+# Stuff generated into home
+home/.config/nvim/
+home/.config/navi/navi.log
+
 # Encrypted files
 .gitconfig.private
 .gitconfig.lely
+vectorv2.cheat

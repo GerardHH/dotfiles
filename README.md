@@ -8,10 +8,20 @@ See `util/container/Dockerfile` for all details, but here is a summary:
 * gpg
 * homebrew
 * procps
+* xclip
 Testing:
 * podman
+### Terminal emulator
+Install an emulator using the host package manager. Currently the ones that are supported are:
+* alacritty
 ## Setup
-Download `bootstrap.sh` and execute. Use `util/validate.sh` to see if the setup was successful.
+Download `bootstrap.sh` and execute. Use `automation/validate.sh` to see if the setup was successful.
 ## Secrets
 The decryption uses GPG and requires to have a `.env` file available with the correct secrets setup, use `util/setup_secrets.sh` which uses bitwarden to setup the file.
 Note that `GPG_PRIVATE_KEY` is encoded using `base64 --wrap=0` so that it can be passed around in environment variables.
+# Whishlist
+* `automation/util.sh:execute_scripts`: Better error reporting
+* `automation/validate/nvim.sh`:
+- Validate that plugins were installed
+- Validate that checkhealth doesn't return any errors
+
