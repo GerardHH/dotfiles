@@ -50,6 +50,7 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
 export LESSOPEN='|~/.config/zsh/lessfilter %s'
 
 # Sources
+source "${HOME}/dotfiles/automation/source_brew.sh"
 source "$HOME/.config/zsh/plugins/eza.zsh"
 local CARGO="$HOME/.cargo/env"
 if [ -e $CARGO ]; then

@@ -91,3 +91,6 @@ style = "Italic"
 [font.normal]
 family = "Hack Nerd Font"
 style = "Regular"
+
+[terminal]
+shell = "/home/linuxbrew/.linuxbrew/bin/zsh"
