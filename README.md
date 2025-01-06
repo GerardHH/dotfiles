@@ -26,4 +26,5 @@ Note that `GPG_PRIVATE_KEY` is encoded using `base64 --wrap=0` so that it can be
 * `automation/validate/nvim.sh`:
 - Validate that plugins were installed
 - Validate that checkhealth doesn't return any errors
-
+* nvim:
+- lazygit (<leader>gg) and yazi (<leader>ve) only work when tmux is active. Should work either or.
