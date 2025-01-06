@@ -62,8 +62,6 @@
     rebase = true # use rebase strategy for git pull
 [includeIf "gitdir:~/**"]
     path = ~/.gitconfig.private
-[includeIf "gitdir:**/vectorv2/**"]
-    path = ~/.gitconfig.lely
-[includeIf "gitdir:**/vector/**"]
+[includeIf "gitdir:~/git/lely/**"]
     path = ~/.gitconfig.lely
 
