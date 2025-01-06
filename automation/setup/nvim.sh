@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CPP_LS=("llvm")
-LUA_LS=("lua-language-server")
+LUA_LS=("lua-language-server" "stylua")
 SHELL_LS=("bash-language-server" "shellcheck" "shfmt")
 
 OTHER_DEPS=("fzf" "lazygit" "ripgrep" "yazi")
