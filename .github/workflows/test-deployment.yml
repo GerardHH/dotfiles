@@ -33,7 +33,7 @@ jobs:
 
       - name: Test deployment using bootstrap.sh
         if: ${{ github.ref == 'refs/heads/main' }}
-        run: ./automation/containers/run_bootstrap.sh
+        run: ./automation/container/run_bootstrap.sh
 
       - name: Clean up
         if: always()
