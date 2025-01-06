@@ -9,4 +9,5 @@ source "${AUTO_DIR}/source_brew.sh"
 
 brew install \
 	btop \
+    delta \
 	lazydocker
