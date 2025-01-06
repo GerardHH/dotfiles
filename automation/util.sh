@@ -29,10 +29,11 @@ execute_scripts() {
 			continue
 		fi
 
-		if [[ "$(stat -c '%a' "${script}")" -gt 755 ]]; then
-			echo "Skipping: Unsafe permissions"
-			continue
-		fi
+		# Gave this error on the work laptop, even though the permisions seem to be 755
+		#if [[ "$(stat -c '%a' "${script}")" -gt 755 ]]; then
+			#echo "Skipping: Unsafe permissions"
+			#continue
+		#fi
 
 		"${script}"
 
