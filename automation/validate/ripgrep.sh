@@ -7,7 +7,7 @@ fi
 
 source "${AUTO_DIR}/source_brew.sh"
 
-if ! command -v ripgrep; then
+if ! command -v rgrep; then
 	echo "Error: Could not find ripgrep"
 	exit 1
 fi
