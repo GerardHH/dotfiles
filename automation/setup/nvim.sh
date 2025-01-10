@@ -2,6 +2,7 @@
 
 CPP_LS=("llvm")
 LUA_LS=("lua-language-server" "stylua")
+MARKDOWN_LS=("marksman")
 SHELL_LS=("bash-language-server" "shellcheck" "shfmt")
 
 OTHER_DEPS=("fzf" "lazygit" "ripgrep" "yazi")
@@ -53,6 +54,7 @@ if ! command -v nvim; then
 		neovim \
 		"${CPP_LS[@]}" \
 		"${LUA_LS[@]}" \
+		"${MARKDOWN_LS[@]}" \
 		"${SHELL_LS[@]}" \
 		"${OTHER_DEPS[@]}"
 else
