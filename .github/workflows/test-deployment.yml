@@ -22,8 +22,11 @@ jobs:
 
       - name: Setup up secrets
         run: |
-          echo "GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}" >> .env
-          echo "GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}" >> .env
+          {
+            echo "GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}"
+            echo "GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}"
+            echo "SSH_GITHUB_PRIVATE=${{ secrets.SSH_GITHUB_PRIVATE }}"
+          } > .env
           chmod 600 .env
 
       - name: Test deployment
