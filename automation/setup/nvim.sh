@@ -28,7 +28,7 @@ if [[ ! -d "${NVIM_DIR}" ]]; then
 		exit 1
 	fi
 
-	if ! git clone git@github.com:GerardHH/nvim.git "${NVIM_DIR}"; then
+	if ! git clone https://github.com/GerardHH/nvim.git "${NVIM_DIR}"; then
 		echo "Error: Could not clone into '${NVIM_DIR}'"
 		exit 1
 	fi
