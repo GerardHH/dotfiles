@@ -15,7 +15,7 @@ fi
 
 if [[ -z "${GPG_PRIVATE_KEY}" ]]; then
 	echo "Error: No GPG_PRIVATE_KEY set, please set it manually or use setup_secrets.sh"
-	exit 1
+	exit 2
 fi
 
 echo "Import private key"
