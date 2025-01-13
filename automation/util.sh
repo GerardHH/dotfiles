@@ -17,7 +17,7 @@ execute_scripts() {
 	echo "Run scripts in '${scripts_dir}'"
 
 	for script in "${scripts_dir}"/*; do
-        echo "" # New line for my dyslexic ass
+		echo "" # New line for my dyslexic ass
 		echo "----- ${script} -----"
 
 		if [[ ! -x "${script}" ]]; then
@@ -32,8 +32,8 @@ execute_scripts() {
 
 		# Gave this error on the work laptop, even though the permisions seem to be 755
 		#if [[ "$(stat -c '%a' "${script}")" -gt 755 ]]; then
-			#echo "Skipping: Unsafe permissions"
-			#continue
+		#echo "Skipping: Unsafe permissions"
+		#continue
 		#fi
 
 		"${script}"
