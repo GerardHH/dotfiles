@@ -3,6 +3,7 @@
 export ROOT_DIR="${HOME}/dotfiles"
 export HOME_DIR="${ROOT_DIR}/home"
 export AUTO_DIR="${ROOT_DIR}/automation"
+export LOG_DIR="${ROOT_DIR}/log"
 
 execute_scripts() {
 	if [[ "$#" -eq 0 ]]; then
