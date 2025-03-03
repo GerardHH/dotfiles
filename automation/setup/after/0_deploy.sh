@@ -24,6 +24,7 @@ TARGET="${HOME}"
 echo "Deploying from '${SOURCE}' to '${TARGET}'"
 
 stow \
-	--dir "${SOURCE}" \
-	--target "${TARGET}" \
+	--dir="${SOURCE}" \
+	--target="${TARGET}" \
+    --ignore="(\.gpg)" \
     --stow .
