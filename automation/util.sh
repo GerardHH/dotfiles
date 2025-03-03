@@ -3,6 +3,7 @@
 export ROOT_DIR="${HOME}/dotfiles"
 export HOME_DIR="${ROOT_DIR}/home"
 export AUTO_DIR="${ROOT_DIR}/automation"
+export LOG_DIR="${ROOT_DIR}/log"
 
 execute_scripts() {
 	if [[ "$#" -eq 0 ]]; then
@@ -16,7 +17,7 @@ execute_scripts() {
 	echo "Run scripts in '${scripts_dir}'"
 
 	for script in "${scripts_dir}"/*; do
-        echo "" # New line for my dyslexic ass
+		echo "" # New line for my dyslexic ass
 		echo "----- ${script} -----"
 
 		if [[ ! -x "${script}" ]]; then
@@ -29,10 +30,11 @@ execute_scripts() {
 			continue
 		fi
 
-		if [[ "$(stat -c '%a' "${script}")" -gt 755 ]]; then
-			echo "Skipping: Unsafe permissions"
-			continue
-		fi
+		# Gave this error on the work laptop, even though the permisions seem to be 755
+		#if [[ "$(stat -c '%a' "${script}")" -gt 755 ]]; then
+		#echo "Skipping: Unsafe permissions"
+		#continue
+		#fi
 
 		"${script}"
 

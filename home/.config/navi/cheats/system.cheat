@@ -7,19 +7,18 @@ $ apt_autoremove: echo "sudo apt autoremove --yes"
 # apt update, upgrade and autoremove
 <apt_update> && <apt_upgrade> && <apt_autoremove>
 
-% nix
+% brew
 
-$ update_home: echo "nix-channel --update && home-manager switch"
+$ brew_update: echo "brew update"
+$ brew_upgrade: echo "brew upgrade"
 
-# Update home
-<update_home>
+# brew update
+<brew_update> && <brew_upgrade>
 
-# Remove all broken links
-find . -xtype l -delete
 
 % system
 @ apt
-@ nix
+@ brew
 
 # Update system
-<apt_update> && <apt_upgrade> && <apt_autoremove> && <update_home>
+<apt_update> && <apt_upgrade> && <apt_autoremove> && <brew_update> && <brew_upgrade>
