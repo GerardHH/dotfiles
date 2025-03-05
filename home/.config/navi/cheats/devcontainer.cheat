@@ -1,0 +1,13 @@
+% devcontainer
+
+# Setup devcontainer
+devcontainer up --workspace-folder=<workspace-folder> --docker-path=podman <remove-existing-container> --additional-features="{\"ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2\": { \"shallowClone\": true }}"
+
+# Drop in devcontainer
+devcontainer exec --workspace-folder=<workspace-folder> --docker-path=podman -- /bin/bash
+
+$ workspace-folder: find . -type d -path "*/.devcontainer" -exec dirname {} \;
+
+$ remove-existing-container: echo "\
+--remove-existing-container \
+" | tr " " "\n"
