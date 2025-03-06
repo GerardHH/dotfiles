@@ -1,7 +1,7 @@
 % devcontainer
 
 # Setup devcontainer
-devcontainer up --workspace-folder=<workspace-folder> --docker-path=podman <remove-existing-container> --additional-features="{\"ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2\": { \"shallowClone\": true }}"
+devcontainer up --workspace-folder=<workspace-folder> --docker-path=podman <remove-existing-container> --additional-features="{\"ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2\": { \"shallowClone\": true }}" --dotfiles-repository="https://github.com/GerardHH/dotfiles" --dotfiles-install-command="automation/setup.sh"
 
 # Drop in devcontainer
 devcontainer exec --workspace-folder=<workspace-folder> --docker-path=podman -- /bin/bash
