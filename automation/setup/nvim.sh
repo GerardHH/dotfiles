@@ -34,17 +34,10 @@ else
 	echo "'${NVIM_DIR}' exists"
 fi
 
-source "${AUTO_DIR}/source_brew.sh"
-
 if ! command -v nvim; then
 	echo "Did not find nvim, installing + dependencies..."
 
-	if ! command -v brew; then
-		echo "Error: cannot find brew"
-		exit 1
-	fi
-
-	brew install \
+	brew_install \
 		neovim \
 		"${CPP_LS[@]}" \
 		"${LUA_LS[@]}" \

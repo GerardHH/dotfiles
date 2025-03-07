@@ -18,6 +18,6 @@ source "${HOME}/dotfiles/automation/util.sh"
 echo "Setup Perl dependencies"
 if ! command -v cpanm; then
 	echo "No cpanm found, installing..."
-	brew install cpanm
+	brew_install cpanm
 fi
 cpanm IPC::Cmd

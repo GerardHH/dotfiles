@@ -6,7 +6,7 @@ source "${HOME}/dotfiles/automation/util.sh"
 if ! command -v shellcheck; then
 	echo "Warning: shellcheck not found, installing..."
 
-	brew install shellcheck
+	brew_install shellcheck
 fi
 
 # Move to repo root, so that "shellcheck source=./automation/util.sh" can direct shellcheck on `source` commands
