@@ -3,7 +3,6 @@
 export ROOT_DIR="${HOME}/dotfiles"
 export HOME_DIR="${ROOT_DIR}/home"
 export AUTO_DIR="${ROOT_DIR}/automation"
-export LOG_DIR="${ROOT_DIR}/log"
 
 source "${AUTO_DIR}/source_brew.sh"
 
@@ -19,21 +18,7 @@ brew_install() {
         return 2
     fi
 
-    local caller_info="$(caller 0)"
-    local timestamp="$(date +"%Y-%m-%d %H:%M:%S")"
-    local header="[${timestamp}][${caller_info}]"
-    local output="$(brew install "$@" 2>&1)"
-    local result=$?
-
-    {
-        echo ""
-        echo "${header}"
-        echo "${output}"
-    } >> "${LOG_DIR}/homebrew.log"
-
-    if [[ ${result} -ne 0 ]]; then
-        echo "Error: Failed to install '$*', refer to '${header}' in '${LOG_DIR}/homebrew.log'"
-    fi
+    brew install "$@"
 }
 
 execute_scripts() {

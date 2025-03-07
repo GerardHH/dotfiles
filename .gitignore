@@ -10,7 +10,3 @@ home/.config/nvim/
 .gitconfig.private
 .gitconfig.lely
 vectorv2.cheat
-
-# Ignore everything in log folder
-log/*
-!log/.gitkeep
