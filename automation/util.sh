@@ -44,12 +44,12 @@ execute_scripts() {
 	fi
 
 	local scripts_dir=$1
+    local failures=() # List of script|code|output
 
-	echo "Run scripts in '${scripts_dir}'"
+	echo "====== Execute in '${scripts_dir}' ======"
 
 	for script in "${scripts_dir}"/*; do
-		echo "" # New line for my dyslexic ass
-		echo "----- ${script} -----"
+		echo "${script}"
 
 		if [[ ! -x "${script}" ]]; then
 			echo "Skipping: Not executable"
@@ -61,17 +61,34 @@ execute_scripts() {
 			continue
 		fi
 
+        local output_and_result=$(bash "${script}" 2>&1; echo $?;) # Capture output + exit code
+        local output="${output_and_result%$'\n'*}" # Extract everything but the last line
+        local exit_code="${output_and_result##*$'\n'}" # Extract last line
 
-        # Run in "isolated" subshell
-        (
-            "${script}"
-        )
+        if [[ exit_code -eq 0 ]]; then
+            echo "✅ Success"
+        else
+            echo "❌ Fail"
+            failures+=("${script}|${exit_code}|${output}")
+        fi
+    done
 
-		RESULT=$?
-		if [[ "${RESULT}" -ne 0 ]]; then
-			echo "----- Failed: ${RESULT} -----"
-		else
-			echo "----- Success! -----"
-		fi
-	done
+    echo "====== Execution Summary ======"
+
+    if [[ ${#failures[@]} -ne 0 ]]; then
+        echo "❌ Failures:"
+        for failure in "${failures[@]}"; do
+            IFS='|' read -r -d '' script exit_code output <<< "${failure}"
+            echo "${script}:"
+            echo "exit_code: ${exit_code}"
+            echo "----- Output -----"
+            echo "${output}"
+            echo "------------------"
+        done
+        echo "====== Done ======"
+        exit 1
+    fi
+
+    echo "✅ All succeeded!"
+    echo "====== Done ======"
 }
