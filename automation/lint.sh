@@ -14,7 +14,8 @@ pushd "${ROOT_DIR}" || exit
 
 # Excluded checks:
 # - SC1091: Not following. Can't figure out a nice way to resolve $HOME.
+# - SC2155: Declare and assign separately to avoid masking return values. Annoying.
 # - SC2312: Consider invoking this command separately to avoid masking its return value. Annoying.
-find "${REPO_PATH}" -type f -name "*.sh" -exec shellcheck --enable=all --exclude=SC1091,SC2312 {} +
+find . -type f -name "*.sh" -exec shellcheck --enable=all --exclude=SC1091,SC2155,SC2312 {} +
 
 popd || exit
