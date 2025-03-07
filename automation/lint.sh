@@ -1,15 +1,7 @@
 #!/bin/bash
 
-REPO_PATH="${REPO_PATH:-${HOME}/dotfiles}"
-
-source "${REPO_PATH}"/automation/util.sh
-
-if [[ -z "${AUTO_DIR}" ]]; then
-	echo "Error: AUTO_DIR not set"
-	exit 1
-fi
-
-source "${AUTO_DIR}"/source_brew.sh
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v shellcheck; then
 	echo "Warning: shellcheck not found, installing..."
@@ -17,7 +9,12 @@ if ! command -v shellcheck; then
 	brew install shellcheck
 fi
 
+# Move to repo root, so that "shellcheck source=./automation/util.sh" can direct shellcheck on `source` commands
+pushd "${ROOT_DIR}" || exit
+
 # Excluded checks:
 # - SC1091: Not following. Can't figure out a nice way to resolve $HOME.
 # - SC2312: Consider invoking this command separately to avoid masking its return value. Annoying.
 find "${REPO_PATH}" -type f -name "*.sh" -exec shellcheck --enable=all --exclude=SC1091,SC2312 {} +
+
+popd || exit

@@ -9,12 +9,8 @@ DEPS=( \
     "zoxide" \
 )
 
-if [[ -z "${AUTO_DIR}" ]]; then
-	echo "Error: AUTO_DIR not set"
-	exit 2
-fi
-
-source "${AUTO_DIR}/source_brew.sh"
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v zsh; then
 	echo "Did not find zsh, installing + dependencies..."
@@ -29,10 +25,5 @@ if ! command -v zsh; then
         "${DEPS[@]}"
 else
 	echo "Zsh already installed"
-fi
-
-if [[ -z "${HOME_DIR}" ]]; then
-	echo "Error: HOME_DIR not set"
-	exit 2
 fi
 

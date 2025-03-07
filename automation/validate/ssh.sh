@@ -1,11 +1,9 @@
 #!/bin/bash
 
-if [[ -z "${HOME_DIR}" ]]; then
-	echo "Error: HOME_DIR not set"
-	exit 2
-fi
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
-ssh_source_dir="${HOME}/dotfiles/home/.ssh"
+ssh_source_dir="${HOME_DIR}/.ssh"
 
 if [[ ! -d "${ssh_source_dir}" ]]; then
 	echo "Error: '${ssh_source_dir}' doesn't exist"

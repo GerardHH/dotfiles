@@ -1,12 +1,11 @@
 #!/bin/bash
 
+#shellcheck source=./automation/util.sh
+source "${HOME}"/dotfiles/automation/util.sh
+
 if ! command -v gpg; then
 	echo "Error: gpg command not found"
 	exit 1
-fi
-
-if [[ -z "${ROOT_DIR}" ]]; then
-    echo "Warning: ROOT_DIR not set"
 fi
 
 if [[ -f "${ROOT_DIR}"/.env ]]; then

@@ -8,10 +8,8 @@ PYTHON_LS=("pyright" "ruff" "mypy")
 
 OTHER_DEPS=("fzf" "lazygit" "ripgrep" "yazi")
 
-if [[ -z "${HOME_DIR}" ]]; then
-	echo "Error: HOME_DIR not set"
-	exit 2
-fi
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 NVIM_DIR="${HOME_DIR}/.config/nvim"
 
@@ -34,11 +32,6 @@ if [[ ! -d "${NVIM_DIR}" ]]; then
 	fi
 else
 	echo "'${NVIM_DIR}' exists"
-fi
-
-if [[ -z "${AUTO_DIR}" ]]; then
-	echo "Error: AUTO_DIR not set"
-	exit 2
 fi
 
 source "${AUTO_DIR}/source_brew.sh"

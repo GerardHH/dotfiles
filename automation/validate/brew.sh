@@ -1,9 +1,7 @@
 #!/bin/bash
 
-if [[ -z "${AUTO_DIR}" ]]; then
-    echo "Error: AUTO_DIR not set"
-    exit 1
-fi
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 if [[ -f "${AUTO_DIR}"/.env ]]; then
 	source "${AUTO_DIR}"/.env

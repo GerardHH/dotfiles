@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source "${HOME}"/dotfiles/util/util.sh
+#shellcheck source=./automation/util.sh
+source "${HOME}"/dotfiles/automation/util.sh
 
 if ! command -v gpg; then
 	echo "Error: Failed to detect gpg"
@@ -9,11 +10,6 @@ fi
 
 if [[ -z "$(gpg --list-secret-keys)" ]]; then
     echo "Error: gpg doesn't have any private keys"
-    exit 1
-fi
-
-if [[ -z "${AUTO_DIR}" ]]; then
-    echo "Error: AUTO_DIR not set"
     exit 1
 fi
 

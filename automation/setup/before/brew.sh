@@ -12,13 +12,8 @@ if [[ ! -d "${BREW_PREFIX}" ]]; then
 	exit 1
 fi
 
-if [[ -z "${AUTO_DIR}" ]]; then
-    echo "Error: AUTO_DIR not set"
-    exit 1
-fi
-
-echo "Source brew"
-source "${AUTO_DIR}"/source_brew.sh
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 echo "Setup Perl dependencies"
 if ! command -v cpanm; then

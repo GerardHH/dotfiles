@@ -1,11 +1,7 @@
 #!/bin/bash
 
-if [[ -z "${AUTO_DIR}" ]]; then
-	echo "Error: AUTO_DIR not set"
-	exit 2
-fi
-
-source "${AUTO_DIR}/source_brew.sh"
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v zsh; then
     echo "Error: zsh not found"

@@ -2,12 +2,8 @@
 
 # Use subshell to protect parent environment.
 (
+    #shellcheck source=./automation/util.sh
 	source "${HOME}/dotfiles/automation/util.sh"
-
-	if [[ -z "${AUTO_DIR}" ]]; then
-		echo "Error: AUTO_DIR not set"
-		exit 1
-	fi
 
 	SCRIPTS_DIR="${AUTO_DIR}"/setup
 
