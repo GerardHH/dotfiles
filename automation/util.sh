@@ -67,7 +67,10 @@ execute_scripts() {
 		#continue
 		#fi
 
-		"${script}"
+        # Run in "isolated" subshell
+        (
+            "${script}"
+        )
 
 		RESULT=$?
 		if [[ "${RESULT}" -ne 0 ]]; then
