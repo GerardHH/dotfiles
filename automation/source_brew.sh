@@ -7,7 +7,11 @@ if [[ ! -d "${BREW_PREFIX}" ]]; then
 	exit 1
 fi
 
-export PATH="${BREW_PREFIX}/bin:${BREW_PREFIX}/sbin:${PATH}"
-eval "$(brew shellenv)"
+BREW_PATHS="${BREW_PREFIX}/bin:${BREW_PREFIX}/sbin"
 
-export HOMEBREW_NO_ENV_HINTS=1
+if [[ "${PATH}" != *"${BREW_PATHS}"* ]]; then
+    export PATH="${BREW_PREFIX}/bin:${BREW_PREFIX}/sbin:${PATH}"
+    eval "$(brew shellenv)"
+
+    export HOMEBREW_NO_ENV_HINTS=1
+fi
