@@ -9,8 +9,8 @@ if ! command -v gpg; then
 fi
 
 if [[ -z "$(gpg --list-secret-keys)" ]]; then
-    echo "Error: gpg doesn't have any private keys"
-    exit 1
+	echo "Error: gpg doesn't have any private keys"
+	exit 1
 fi
 
 if [[ -f "${AUTO_DIR}"/.env ]]; then
@@ -22,7 +22,16 @@ if [[ -z "${GPG_PASSPHRASE}" ]]; then
 	exit 1
 fi
 
+echo "Info: Encrypt message"
 echo "Test message" | gpg --batch --yes --pinentry-mode loopback --encrypt --recipient "gh.heshusius@gmail.com" --output test.gpg
+
+# shellcheck disable=SC2181
+if [[ "$?" -ne 0 ]]; then
+	echo "Error: Encryption failed"
+	exit 1
+fi
+
+echo "Info: Decrypt message"
 if ! gpg --batch --yes --pinentry-mode loopback --passphrase "${GPG_PASSPHRASE}" --decrypt test.gpg; then
 	echo "Error: Failed to encrypt -> decrypt simple message using gpg"
 	rm test.gpg
