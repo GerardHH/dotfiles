@@ -12,13 +12,13 @@ if [[ -f "${ROOT_DIR}"/.env ]]; then
 	source "${ROOT_DIR}"/.env
 fi
 
-if [[ -z "${GPG_PRIVATE_KEY}" ]]; then
-	echo "Error: No GPG_PRIVATE_KEY set, please set it manually or use setup_secrets.sh"
+if [[ -z "${GPG_KEY_PRIVATE}" ]]; then
+	echo "Error: No GPG_KEY_PRIVATE set, please set it manually or use setup_secrets.sh"
 	exit 2
 fi
 
 echo "Import private key"
-echo "${GPG_PRIVATE_KEY}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
+echo "${GPG_KEY_PRIVATE}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
 
 echo "Get list of gpg ID's"
 # Extract the key ID on line that starts with fpr, 10th column
