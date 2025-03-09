@@ -25,6 +25,7 @@ jobs:
           {
             echo "GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}"
             echo "GPG_KEY_PRIVATE=${{ secrets.GPG_KEY_PRIVATE }}"
+            echo "GPG_KEY_PUBLIC=${{ secrets.GPG_KEY_PUBLIC }}"
             echo "SSH_GITHUB_PRIVATE=${{ secrets.SSH_GITHUB_PRIVATE }}"
           } > .env
           chmod 600 .env

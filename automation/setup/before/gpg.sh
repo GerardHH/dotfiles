@@ -17,8 +17,16 @@ if [[ -z "${GPG_KEY_PRIVATE}" ]]; then
 	exit 2
 fi
 
+if [[ -z "${GPG_KEY_PUBLIC}" ]]; then
+	echo "Error: No GPG_KEY_PUBLIC set, please set it manually or use setup_secrets.sh"
+	exit 2
+fi
+
 echo "Import private key"
 echo "${GPG_KEY_PRIVATE}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
+
+echo "Import public key"
+echo "${GPG_KEY_PUBLIC}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
 
 echo "Get list of gpg ID's"
 # Extract the key ID on line that starts with fpr, 10th column
