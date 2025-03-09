@@ -46,16 +46,15 @@ if [[ ! -L "${ssh_target_config}" ]]; then
 	exit 1
 fi
 
-github_message="Hi GerardHH! You've successfully authenticated, but GitHub does not provide shell access."
-# Format: key_env_var|key_path|host|user_name|welcome_message
+# Format: key_env_var|key_path|host|user_name
 keys=(
 	"SSH_GITHUB_PRIVATE|github.private|github.com|git|${github_message}"
 )
 
 for key in "${keys[@]}"; do
-	IFS='|' read -r key_env_var key_path host user_name welcome_message <<<"${key}"
+	IFS='|' read -r key_env_var key_path host user_name <<<"${key}"
 
-	echo "Info: key_env_var: ${key_env_var}, key_path: ${key_path}, host: ${host}, user_name: ${user_name}, welcome_message: ${welcome_message}"
+	echo "Info: key_env_var: ${key_env_var}, key_path: ${key_path}, host: ${host}, user_name: ${user_name}"
 
 	if [[ ! -f "${ssh_source_dir}/${key_path}" ]]; then
 		echo "Error: '${ssh_source_dir}/${key_path}' doesn't exist"
@@ -79,8 +78,9 @@ for key in "${keys[@]}"; do
 		exit 1
 	fi
 
-	if ! ssh -T -o StrictHostKeyChecking=no "${user_name}@${host}" | grep --quiet "${welcome_message}"; then
-		echo "Error: Connection '${user_name}@${host}' did not return '${welcome_message}'"
+	local exit_code=$(ssh -T -o StrictHostKeyChecking=no "${user_name}@${host}")
+	if [[ "${exit_code}" -eq 255 ]]; then
+		echo "Error: Connection '${user_name}@${host}' refused"
 		exit 1
 	fi
 done

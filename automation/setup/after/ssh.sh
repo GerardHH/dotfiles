@@ -7,14 +7,13 @@ if [[ ! -d "${ssh_dir}" ]]; then
 	exit 1
 fi
 
-github_message="Hi GerardHH! You've successfully authenticated, but GitHub does not provide shell access."
-# Format: key_path|host|user_name|welcome_message
+# Format: key_path|host|user_name
 keys=(
-	"${ssh_dir}/github.private|github.com|git|${github_message}"
+	"${ssh_dir}/github.private|github.com|git"
 )
 
 for key in "${keys[@]}"; do
-	IFS='|' read -r key_path host user_name welcome_message <<<"${key}"
+	IFS='|' read -r key_path host user_name <<<"${key}"
 
 	eval "$(ssh-agent -s)"
 
@@ -23,8 +22,9 @@ for key in "${keys[@]}"; do
 		exit 1
 	fi
 
-	if ! ssh -T -o StrictHostKeyChecking=no "${user_name}@${host}" | grep --quiet "${welcome_message}"; then
-		echo "Error: Connection '${user_name}@${host}' did not welcome with '${welcome_message}'"
+	local exit_code=$(ssh -T -o StrictHostKeyChecking=no "${user_name}@${host}")
+	if [[ "${exit_code}" -eq 255 ]]; then
+		echo "Error: Connection '${user_name}@${host}' refused"
 		exit 1
 	fi
 done
