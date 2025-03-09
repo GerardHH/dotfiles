@@ -38,6 +38,6 @@ fi
 
 echo "Set trust per gpg ID"
 echo "${KEY_IDS}" | while IFS= read -r key_id; do
-    # Set the trust level
-    echo "${key_id}:3:" | gpg --import-ownertrust
+	# Set the trust level
+	echo "${key_id}:3:" | gpg --import-ownertrust
 done
