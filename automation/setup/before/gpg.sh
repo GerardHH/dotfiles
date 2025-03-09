@@ -20,13 +20,16 @@ fi
 echo "Import private key"
 echo "${GPG_PRIVATE_KEY}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
 
-echo "Set trust level"
+echo "Get list of gpg ID's"
 # Extract the key ID on line that starts with fpr, 10th column
-KEY_ID=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr/{print $10}')
-if [[ -z "${KEY_ID}" ]]; then
+KEY_IDS=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr/{print $10}')
+if [[ -z "${KEY_IDS}" ]]; then
 	echo "Error: Could not extract key ID"
 	exit 1
 fi
 
-# Set the trust level
-echo "${KEY_ID}:6:" | gpg --import-ownertrust
+echo "Set trust per gpg ID"
+echo "${KEY_IDS}" | while IFS= read -r key_id; do
+    # Set the trust level
+    echo "${key_id}:3:" | gpg --import-ownertrust
+done
