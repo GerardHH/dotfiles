@@ -8,6 +8,14 @@ if ! command -v gpg; then
 	exit 1
 fi
 
+# Returns 0 when found
+if gpg --list-secret-key --with-colons | grep "Gerard Heshusius <gh.heshusius@gmail.com>"; then
+	echo "Info: Secret key already known, stopping"
+	exit 0
+fi
+
+brew_install expect
+
 if [[ -f "${ROOT_DIR}"/.env ]]; then
 	source "${ROOT_DIR}"/.env
 fi
@@ -28,16 +36,19 @@ echo "${GPG_KEY_PRIVATE}" | base64 --decode | gpg --batch --yes --pinentry-mode 
 echo "Import public key"
 echo "${GPG_KEY_PUBLIC}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
 
-echo "Get list of gpg ID's"
-# Extract the key ID on line that starts with fpr, 10th column
-KEY_IDS=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr/{print $10}')
-if [[ -z "${KEY_IDS}" ]]; then
-	echo "Error: Could not extract key ID"
-	exit 1
-fi
+KEY_ID=$(gpg --list-secret-key --with-colons | awk -F: '/^fpr/{print $10}' | head -n 1)
 
-echo "Set trust per gpg ID"
-echo "${KEY_IDS}" | while IFS= read -r key_id; do
-	# Set the trust level
-	echo "${key_id}:3:" | gpg --import-ownertrust
-done
+expect <<EOF
+spawn gpg --edit-key ${KEY_ID}
+expect "gpg>"
+send "trust\n"
+expect "Your decision?"
+send "5\n"
+expect "Do you really want to set this key to ultimate trust? (y/N)"
+send "y\n"
+expect "gpg>"
+send "save\n"
+EOF
+# Make sure there's a new line at end of this scripts output
+# util.sh::execute_scripts expects that
+echo ""
