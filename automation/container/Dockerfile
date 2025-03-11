@@ -18,9 +18,14 @@ USER testuser
 WORKDIR /home/testuser
 ENV HOME=/home/testuser
 
-#Simulate existing folders
+# Simulate existing folders
 RUN mkdir .config
 RUN mkdir .ssh && chmod 700 .ssh
+
+# Simulate conflicts for stow
+RUN touch .gitconfig
+RUN mkdir -p .config/nvim && \
+    touch .config/nvim/init.lua
 
 # Install homebrew as testuser
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
