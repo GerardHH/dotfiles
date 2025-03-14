@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#shellcheck source=./automation/util.sh
+source "${HOME}"/dotfiles/automation/util.sh
+
 if ! command -v gpg; then
 	echo "Error: gpg command not found"
 	exit 1
@@ -7,11 +10,6 @@ fi
 
 if [[ -z "$(gpg --list-secret-keys)" ]]; then
 	echo "Error: gpg doesn't have any private keys"
-	exit 1
-fi
-
-if [[ -z "${ROOT_DIR}" ]]; then
-	echo "Error: ROOT_DIR not set"
 	exit 1
 fi
 
