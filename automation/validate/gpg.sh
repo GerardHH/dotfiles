@@ -13,9 +13,7 @@ if [[ -z "$(gpg --list-secret-keys)" ]]; then
 	exit 1
 fi
 
-if [[ -f "${AUTO_DIR}"/.env ]]; then
-	source "${AUTO_DIR}"/.env
-fi
+load_secrets
 
 if [[ -z "${GPG_PASSPHRASE}" ]]; then
 	echo "Error: Empty GPG_PASSPHRASE, please set it securily"

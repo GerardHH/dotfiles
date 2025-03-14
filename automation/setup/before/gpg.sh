@@ -16,9 +16,7 @@ fi
 
 brew_install expect
 
-if [[ -f "${ROOT_DIR}"/.env ]]; then
-	source "${ROOT_DIR}"/.env
-fi
+load_secrets
 
 if [[ -z "${GPG_KEY_PRIVATE}" ]]; then
 	echo "Error: No GPG_KEY_PRIVATE set, please set it manually or use setup_secrets.sh"

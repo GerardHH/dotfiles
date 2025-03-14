@@ -3,6 +3,7 @@
 export ROOT_DIR="${HOME}/dotfiles"
 export HOME_DIR="${ROOT_DIR}/home"
 export AUTO_DIR="${ROOT_DIR}/automation"
+export SECRETS_DIR="/run/secrets"
 
 source "${AUTO_DIR}/source_brew.sh"
 
@@ -76,4 +77,16 @@ execute_scripts() {
 
     echo "✅ All succeeded!"
     echo "====== Done ======"
+}
+
+load_secrets() {
+	if [[ -f "${AUTO_DIR}"/.env ]]; then
+		echo "Info: Load secrets in '${AUTO_DIR}'"
+		source "${AUTO_DIR}"/.env
+	elif [[ -f "${SECRETS_DIR}/.env" ]]; then
+		echo "Info: Load secrets in '${SECRETS_DIR}'"
+		source "${SECRETS_DIR}/.env"
+	else
+		echo "Warning: No secrets loaded"
+	fi
 }

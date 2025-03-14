@@ -15,9 +15,7 @@ if [[ -z "${ROOT_DIR}" ]]; then
 	exit 1
 fi
 
-if [[ -f "${ROOT_DIR}"/.env ]]; then
-	source "${ROOT_DIR}"/.env
-fi
+load_secrets
 
 if [[ -z "${GPG_PASSPHRASE}" ]]; then
 	echo "Error: Empty GPG_PASSPHRASE, please set it securily"
