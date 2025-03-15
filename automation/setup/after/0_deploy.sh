@@ -21,6 +21,8 @@ stow_output=$(stow \
 	. \
 	2>&1)
 
+ignore_list="\.gpg"
+
 if [[ -n "${stow_output}" ]]; then
 	echo "Info: stow found conflicts"
 	conflicts=$(echo "$stow_output" | awk -F 'over existing target ' '{print $2}' | awk '{print $1}')
@@ -34,18 +36,20 @@ if [[ -n "${stow_output}" ]]; then
 		full_path_bak="${full_path}.bak"
 		echo "Info: back up '$full_path' to '${full_path_bak}'"
 		if ! mv "${full_path}" "${full_path_bak}"; then
-			echo "Error: Failed to move '$full_path' to '${full_path_bak}'"
-			exit 1
+			echo "Warning: Failed to move '$full_path' skipping"
+			escaped_path=$(echo "${file}" | sed 's/\./\\./g')
+			ignore_list="${ignore_list}|${escaped_path}"
 		fi
 	done
 fi
 
+echo "Info: run 'stow' with ignore list '${ignore_list}'"
+
 if ! stow \
 	--dir="${source_dir}" \
 	--target="${target_dir}" \
-	--ignore="(\.gpg)" \
-	. \
-	2>&1; then
+	--ignore="(${ignore_list})" \
+	.; then
 	echo "Error: Running stow after backing up conflicts still failed"
 	exit 1
 fi
