@@ -30,7 +30,8 @@ execute_scripts() {
 	fi
 
 	local scripts_dir=$1
-	local failures=() # List of script|code|output
+	local warnings=() # List of script|output
+	local failures=() # List of script|output
 
 	echo "====== Execute in '${scripts_dir}' ======"
 
@@ -47,29 +48,37 @@ execute_scripts() {
 			continue
 		fi
 
-		local output_and_result=$(
-			bash "${script}" 2>&1
-			echo $?
-		)                                              # Capture output + exit code
-		local output="${output_and_result%$'\n'*}"     # Extract everything but the last line
-		local exit_code="${output_and_result##*$'\n'}" # Extract last line
+		local output=$(bash "${script}" 2>&1)
 
-		if [[ exit_code -eq 0 ]]; then
-			echo "✅ Success"
-		else
+		if [[ "${output}" == *"Warning:"* ]]; then
+			echo "⚠️  Warning"
+			warnings+=("${script}|${output}")
+		elif [[ "${output}" == *"Error:"* ]]; then
 			echo "❌ Fail"
-			failures+=("${script}|${exit_code}|${output}")
+			failures+=("${script}|${output}")
+		else
+			echo "✅ Success"
 		fi
 	done
 
 	echo "====== Execution Summary ======"
 
+	if [[ ${#warnings[@]} -ne 0 ]]; then
+		echo "⚠️ Warnings:"
+		for warning in "${warnings[@]}"; do
+			IFS='|' read -r -d '' script output <<<"$warning"
+			echo "${script}:"
+			echo "----- Output -----"
+			echo "${output}"
+			echo "------------------"
+		done
+	fi
+
 	if [[ ${#failures[@]} -ne 0 ]]; then
 		echo "❌ Failures:"
 		for failure in "${failures[@]}"; do
-			IFS='|' read -r -d '' script exit_code output <<<"${failure}"
+			IFS='|' read -r -d '' script output <<<"${failure}"
 			echo "${script}:"
-			echo "exit_code: ${exit_code}"
 			echo "----- Output -----"
 			echo "${output}"
 			echo "------------------"
