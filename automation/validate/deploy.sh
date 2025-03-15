@@ -21,10 +21,10 @@ if ! stow \
 	exit 1
 fi
 
-if [[ -e "${target_dir}/.gitconfig.bak" ]]; then
+if [[ ! -e "${target_dir}/.gitconfig.bak" ]]; then
 	echo "Error: Failed to create a backup for the conflicting file '.gitconfig'"
 fi
 
-if [[ -e "${target_dir}/.config/nvim.bak" ]]; then
+if [[ ! -e "${target_dir}/.config/nvim.bak" ]]; then
 	echo "Error: Failed to create a backup for the conflicting folder '.config/nvim'"
 fi
