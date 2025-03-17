@@ -4,11 +4,11 @@
 source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v btop; then
-	echo "Error: Could not find btop"
+	log_error "Could not find btop"
 	exit 1
 fi
 
 if [[ ! -L "${HOME}/.config/btop" ]]; then
-	echo "Error: btop config not deployed"
+	log_error "btop config not deployed"
 	exit 1
 fi

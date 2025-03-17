@@ -4,7 +4,7 @@
 source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v shellcheck; then
-	echo "Warning: shellcheck not found, installing..."
+	log_warning "shellcheck not found, installing..."
 
 	brew_install shellcheck
 fi

@@ -17,17 +17,17 @@ if [[ ! -d "${NVIM_DIR}" ]]; then
 	echo "Did not find '${NVIM_DIR}', creating and checking out..."
 
 	if ! mkdir "${NVIM_DIR}"; then
-		echo "Error: Could not create '${NVIM_DIR}'"
+		log_error "Could not create '${NVIM_DIR}'"
 		exit 1
 	fi
 
 	if ! command -v git; then
-		echo "Error: Cannot find git"
+		log_error "Cannot find git"
 		exit 1
 	fi
 
 	if ! git clone https://github.com/GerardHH/nvim.git "${NVIM_DIR}"; then
-		echo "Error: Could not clone into '${NVIM_DIR}'"
+		log_error "Could not clone into '${NVIM_DIR}'"
 		exit 1
 	fi
 else

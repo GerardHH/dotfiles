@@ -3,7 +3,7 @@
 ssh_dir="${HOME}/.ssh"
 
 if [[ ! -d "${ssh_dir}" ]]; then
-	echo "Error: '${ssh_dir}' not found"
+	log_error "'${ssh_dir}' not found"
 	exit 1
 fi
 
@@ -18,13 +18,13 @@ for key in "${keys[@]}"; do
 	eval "$(ssh-agent -s)"
 
 	if ! ssh-add "${key_path}"; then
-		echo "Error: Failed to add SSH key '${key_path}'"
+		log_error "Failed to add SSH key '${key_path}'"
 		exit 1
 	fi
 
 	local exit_code=$(ssh -T -o StrictHostKeyChecking=no "${user_name}@${host}")
 	if [[ "${exit_code}" -eq 255 ]]; then
-		echo "Error: Connection '${user_name}@${host}' refused"
+		log_error "Connection '${user_name}@${host}' refused"
 		exit 1
 	fi
 done

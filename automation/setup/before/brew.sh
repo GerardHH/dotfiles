@@ -8,7 +8,7 @@ fi
 export BREW_PREFIX=/home/linuxbrew/.linuxbrew
 
 if [[ ! -d "${BREW_PREFIX}" ]]; then
-	echo "Error: brew not installed, please use official brew installation"
+	log_error "brew not installed, please use official brew installation"
 	exit 1
 fi
 

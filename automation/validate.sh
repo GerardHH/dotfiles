@@ -3,7 +3,7 @@
 source "${HOME}"/dotfiles/automation/util.sh
 
 if [[ -z "${AUTO_DIR}" ]]; then
-    echo "Error: AUTO_DIR not set"
+    log_error "AUTO_DIR not set"
     exit 1
 fi
 

@@ -3,7 +3,7 @@
 BREW_PREFIX=/home/linuxbrew/.linuxbrew
 
 if [[ ! -d "${BREW_PREFIX}" ]]; then
-	echo "Error: Cannot find brew installation, please install using the official way"
+	log_error "Cannot find brew installation, please install using the official way"
 	exit 1
 fi
 

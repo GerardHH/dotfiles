@@ -4,13 +4,13 @@
 source "${HOME}"/dotfiles/automation/util.sh
 
 if ! command -v gpg; then
-	echo "Error: gpg command not found"
+	log_error "gpg command not found"
 	exit 1
 fi
 
 # Returns 0 when found
 if gpg --list-secret-key --with-colons | grep "Gerard Heshusius <gh.heshusius@gmail.com>"; then
-	echo "Info: Secret key already known, stopping"
+	log_info "Secret key already known, stopping"
 	exit 0
 fi
 
@@ -19,12 +19,12 @@ brew_install expect
 load_secrets
 
 if [[ -z "${GPG_KEY_PRIVATE}" ]]; then
-	echo "Error: No GPG_KEY_PRIVATE set, please set it manually or use setup_secrets.sh"
+	log_error "No GPG_KEY_PRIVATE set, please set it manually or use setup_secrets.sh"
 	exit 2
 fi
 
 if [[ -z "${GPG_KEY_PUBLIC}" ]]; then
-	echo "Error: No GPG_KEY_PUBLIC set, please set it manually or use setup_secrets.sh"
+	log_error "No GPG_KEY_PUBLIC set, please set it manually or use setup_secrets.sh"
 	exit 2
 fi
 

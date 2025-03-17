@@ -4,11 +4,11 @@
 source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v lazygit; then
-	echo "Error: Could not find lazygit"
+	log_error "Could not find lazygit"
 	exit 1
 fi
 
 if [[ ! -L "${HOME}/.config/lazygit" ]]; then
-	echo "Error: lazygit config not deployed"
+	log_error "lazygit config not deployed"
 	exit 1
 fi
