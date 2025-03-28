@@ -6,4 +6,8 @@ source "${HOME}/dotfiles/automation/util.sh"
 brew_install \
 	btop \
 	delta \
-	lazydocker
+	fzf \
+	lazydocker \
+	lazygit \
+	ripgrep \
+	yazi

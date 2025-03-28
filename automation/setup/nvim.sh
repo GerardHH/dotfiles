@@ -1,7 +1,5 @@
 #!/bin/bash
 
-OTHER_DEPS=("fzf" "lazygit" "ripgrep" "yazi")
-
 #shellcheck source=./automation/util.sh
 source "${HOME}/dotfiles/automation/util.sh"
 
@@ -31,9 +29,8 @@ fi
 if ! command -v nvim; then
 	echo "Did not find nvim, installing + dependencies..."
 
-	brew_install \
-		neovim \
-		"${OTHER_DEPS[@]}"
+	brew_install neovim
+
 else
 	echo "Nvim already installed"
 fi
