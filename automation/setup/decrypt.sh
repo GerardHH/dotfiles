@@ -22,14 +22,14 @@ fi
 
 SOURCE_DIR="${ROOT_DIR}/home"
 
-echo "Source dir: ${SOURCE_DIR}"
+log_info "Source dir: ${SOURCE_DIR}"
 
 find "${SOURCE_DIR}" -type f -name "*.gpg" | while read -r file; do
 	rel_path="${file#"${SOURCE_DIR}"/}"
 	dest_path="${SOURCE_DIR}/${rel_path}"
 	dest_path="${dest_path%.gpg}"
 
-	echo "Decrypt: '${file}' into '${dest_path}'"
+	log_info "Decrypt: '${file}' into '${dest_path}'"
 
 	if [[ -f "${dest_path}" ]]; then
 		log_warning "Already exists, skipping"
@@ -37,7 +37,7 @@ find "${SOURCE_DIR}" -type f -name "*.gpg" | while read -r file; do
 	fi
 
 	if gpg --batch --yes --pinentry-mode loopback --passphrase "${GPG_PASSPHRASE}" --output "${dest_path}" --decrypt "${file}"; then
-		echo "Success!"
+		log_info "Success!"
 	else
 		log_warning "Failed to decrypt"
 	fi

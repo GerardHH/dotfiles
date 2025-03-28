@@ -5,8 +5,8 @@ source "${HOME}/dotfiles/automation/util.sh"
 
 SCRIPTS_DIR="${AUTO_DIR}"/setup
 
-echo "----- Start setup -----"
+log_info "----- Start setup -----"
 execute_scripts "${SCRIPTS_DIR}/before"
 execute_scripts "${SCRIPTS_DIR}"
 execute_scripts "${SCRIPTS_DIR}/after"
-echo "----- Finished setup -----"
+log_info "----- Finished setup -----"

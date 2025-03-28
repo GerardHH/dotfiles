@@ -28,10 +28,10 @@ if [[ -z "${GPG_KEY_PUBLIC}" ]]; then
 	exit 2
 fi
 
-echo "Import private key"
+log_info "Import private key"
 echo "${GPG_KEY_PRIVATE}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
 
-echo "Import public key"
+log_info "Import public key"
 echo "${GPG_KEY_PUBLIC}" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
 
 KEY_ID=$(gpg --list-secret-key --with-colons | awk -F: '/^fpr/{print $10}' | head -n 1)

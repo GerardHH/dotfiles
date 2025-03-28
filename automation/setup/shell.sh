@@ -13,12 +13,12 @@ DEPS=( \
 source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v zsh; then
-	echo "Did not find zsh, installing + dependencies..."
+	log_info "Did not find zsh, installing + dependencies..."
 
 	brew_install \
 		zsh \
         "${DEPS[@]}"
 else
-	echo "Zsh already installed"
+	log_info "Zsh already installed"
 fi
 

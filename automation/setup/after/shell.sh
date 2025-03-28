@@ -8,7 +8,7 @@ if ! command -v zsh; then
 	exit 1
 fi
 
-echo "Source .zshrc"
+log_info "Source .zshrc"
 if ! zsh -c "source ${HOME}/.zshrc"; then
 	log_error "zsh did not source .zshrc without problems"
 	exit 1

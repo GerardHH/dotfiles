@@ -25,13 +25,13 @@ fi
 
 FONT_TAR="${FONT_FAM}.tar.xz"
 
-echo "Download fonts"
+log_info "Download fonts"
 if ! curl --location https://github.com/ryanoasis/nerd-fonts/releases/latest/download/"${FONT_TAR}" --output "${FONT_TAR}" --output-dir "${FONT_DIR}"; then
     log_error "Could not download '${FONT_FAM}'"
     exit 1
 fi
 
-echo "Extract font tar"
+log_info "Extract font tar"
 pushd "${FONT_DIR}" || exit
 if ! tar --extract --file="${FONT_TAR}"; then
     log_error "Could not extract '${FONT_FAM}' in '${FONT_DIR}'"
@@ -40,10 +40,10 @@ if ! tar --extract --file="${FONT_TAR}"; then
 fi
 popd || exit
 
-echo "Refresh font cache"
+log_info "Refresh font cache"
 fc-cache -fv
 
-echo "Clean up tar"
+log_info "Clean up tar"
 if ! rm "${FONT_DIR}/${FONT_TAR}"; then
     log_warning "Could not remove '${FONT_TAR}' in '${FONT_DIR}'"
 fi

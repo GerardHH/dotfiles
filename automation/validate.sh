@@ -9,6 +9,6 @@ fi
 
 SCRIPTS_DIR="${AUTO_DIR}"/validate
 
-echo "----- Start validation -----"
+log_info "----- Start validation -----"
 execute_scripts "${SCRIPTS_DIR}"
-echo "----- Finished validation -----"
+log_info "----- Finished validation -----"

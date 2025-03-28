@@ -6,7 +6,7 @@ source "${HOME}/dotfiles/automation/util.sh"
 NVIM_DIR="${HOME_DIR}/.config/nvim"
 
 if [[ ! -d "${NVIM_DIR}" ]]; then
-	echo "Did not find '${NVIM_DIR}', creating and checking out..."
+	log_info "Did not find '${NVIM_DIR}', creating and checking out..."
 
 	if ! mkdir "${NVIM_DIR}"; then
 		log_error "Could not create '${NVIM_DIR}'"
@@ -23,14 +23,14 @@ if [[ ! -d "${NVIM_DIR}" ]]; then
 		exit 1
 	fi
 else
-	echo "'${NVIM_DIR}' exists"
+	log_info "'${NVIM_DIR}' exists"
 fi
 
 if ! command -v nvim; then
-	echo "Did not find nvim, installing + dependencies..."
+	log_info "Did not find nvim, installing + dependencies..."
 
 	brew_install neovim
 
 else
-	echo "Nvim already installed"
+	log_info "Nvim already installed"
 fi

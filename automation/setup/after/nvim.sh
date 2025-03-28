@@ -8,7 +8,7 @@ if ! command -v nvim; then
 	exit 1
 fi
 
-echo "Install plugins"
+log_info "Install plugins"
 if ! nvim --headless -c 'Lazy! install' -c 'quitall'; then
 	log_error "Lazy did not install plugins"
 	exit 1

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if command -v brew; then
-	echo "Skipping: Brew already setup"
+	log_info "Skipping: Brew already setup"
 	exit 0
 fi
 
@@ -15,9 +15,9 @@ fi
 #shellcheck source=./automation/util.sh
 source "${HOME}/dotfiles/automation/util.sh"
 
-echo "Setup Perl dependencies"
+log_info "Setup Perl dependencies"
 if ! command -v cpanm; then
-	echo "No cpanm found, installing..."
+	log_info "No cpanm found, installing..."
 	brew_install cpanm
 fi
 cpanm IPC::Cmd

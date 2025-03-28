@@ -39,7 +39,7 @@ for key in "${keys[@]}"; do
 
 		if [[ -z "${!key_env_var}" ]]; then
 			log_warning "No '${key_env_var}' set, please set it manually or use setup_secrets.sh"
-			echo "Skipping..."
+			log_info "Skipping..."
 			continue
 		fi
 
