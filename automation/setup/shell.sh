@@ -1,12 +1,12 @@
 #!/bin/bash
 
-DEPS=( \
-    "eza" \
-    "fzf" \
-    "navi" \
-    "oh-my-posh" \
-    "tmux" \
-    "zoxide" \
+DEPS=(
+	"eza"
+	"fzf"
+	"navi"
+	"oh-my-posh"
+	"tmux"
+	"zoxide"
 )
 
 #shellcheck source=./automation/util.sh
@@ -17,8 +17,7 @@ if ! command -v zsh; then
 
 	brew_install \
 		zsh \
-        "${DEPS[@]}"
+		"${DEPS[@]}"
 else
 	log_info "Zsh already installed"
 fi
-

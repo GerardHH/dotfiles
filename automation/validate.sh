@@ -3,8 +3,8 @@
 source "${HOME}"/dotfiles/automation/util.sh
 
 if [[ -z "${AUTO_DIR}" ]]; then
-    log_error "AUTO_DIR not set"
-    exit 1
+	log_error "AUTO_DIR not set"
+	exit 1
 fi
 
 SCRIPTS_DIR="${AUTO_DIR}"/validate
