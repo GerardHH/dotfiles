@@ -9,5 +9,6 @@ brew_install \
 	fzf \
 	lazydocker \
 	lazygit \
+	less \
 	ripgrep \
 	yazi
