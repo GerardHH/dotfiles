@@ -64,4 +64,7 @@
     path = ~/.gitconfig.private
 [includeIf "gitdir:~/git/lely/**"]
     path = ~/.gitconfig.lely
+[includeIf "gitdir:/mnt/**"]
+    path = ~/.gitconfig.lely
+
 
