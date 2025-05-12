@@ -2,6 +2,7 @@
 *.env
 
 # Stuff generated into home
+home/.config/bash/fzf/fzf-tab-completion
 home/.config/btop/btop.log
 home/.config/navi/navi.log
 home/.config/nvim/

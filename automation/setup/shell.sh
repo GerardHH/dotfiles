@@ -12,12 +12,9 @@ DEPS=(
 #shellcheck source=./automation/util.sh
 source "${HOME}/dotfiles/automation/util.sh"
 
-if ! command -v zsh; then
-	log_info "Did not find zsh, installing + dependencies..."
+brew_install "${DEPS[@]}"
 
-	brew_install \
-		zsh \
-		"${DEPS[@]}"
-else
-	log_info "Zsh already installed"
+FZF_TAB_COMPLETION_DIR="$HOME_DIR/.config/bash/fzf"
+if [ ! -d "$FZF_TAB_COMPLETION_DIR" ]; then
+	git clone git@github.com:lincheney/fzf-tab-completion.git "$FZF_TAB_COMPLETION_DIR"
 fi
