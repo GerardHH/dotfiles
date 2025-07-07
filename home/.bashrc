@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Allow dynamic sourcing in known locations
+# shellcheck disable=SC1090,SC1091
+
 # Sources
 source "$HOME"/dotfiles/automation/source_brew.sh
 CARGO="$HOME/.cargo/env"
@@ -10,7 +13,14 @@ fi
 # INFO If not running interactively, then only source and skip the rest
 [[ $- != *i* ]] && return
 
+# Completions
 source /etc/profile.d/bash_completion.sh
+
+if command -v brew >/dev/null 2>1 && [[ -d "$(brew --prefix)/etc/bash_completion.d" ]]; then
+	for f in "$(brew --prefix)"/etc/bash_completion.d/*; do
+		source "$f"
+	done
+fi
 
 source "$HOME/.config/bash/eza.sh"
 source "$HOME/.config/bash/fzf/fzf.sh"
