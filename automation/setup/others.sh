@@ -11,4 +11,5 @@ brew_install \
 	lazygit \
 	less \
 	ripgrep \
+	sst/tap/opencode \
 	yazi
