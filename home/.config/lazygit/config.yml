@@ -1,9 +1,10 @@
 git:
-  allBranchesLogCmd: 'git list-tree --all'
   branchLogCmd: 'git list-tree'
   paging:
     colorArg: always
     pager: delta --dark --paging=never --tabs=4
+  allBranchesLogCmds:
+    - git list-tree --all
 customCommands:
   - key: 'U'
     context: 'files'
