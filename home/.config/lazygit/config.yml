@@ -3,7 +3,7 @@ git:
   branchLogCmd: 'git list-tree'
   paging:
     colorArg: always
-    pager: delta --dark --paging=never
+    pager: delta --dark --paging=never --tabs=4
 customCommands:
   - key: 'U'
     context: 'files'
