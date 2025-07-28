@@ -36,6 +36,11 @@ if [[ ! -L "${HOME}/.bashrc" ]]; then
 	exit 1
 fi
 
+if [[ ! -d "${HOME}/.config/bash/fzf/fzf-tab-completion" ]]; then
+	log_error "fzf-tab-completion not installed"
+	exit 1
+fi
+
 OUTPUT=$(bash-c "source ${HOME}/.bashrc")
 if [[ -n "${OUTPUT}" ]]; then
 	log_error "sourcing .bashrc gave output:"

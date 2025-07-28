@@ -14,7 +14,7 @@ source "${HOME}/dotfiles/automation/util.sh"
 
 brew_install "${DEPS[@]}"
 
-FZF_TAB_COMPLETION_DIR="$HOME_DIR/.config/bash/fzf"
+FZF_TAB_COMPLETION_DIR="$HOME_DIR/.config/bash/fzf/fzf-tab-completion"
 if [ ! -d "$FZF_TAB_COMPLETION_DIR" ]; then
 	git clone git@github.com:lincheney/fzf-tab-completion.git "$FZF_TAB_COMPLETION_DIR"
 fi
