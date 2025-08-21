@@ -96,15 +96,20 @@ execute_scripts() {
 }
 
 load_secrets() {
-	if [[ -f "${AUTO_DIR}"/.env ]]; then
+	set -a
+	if [[ -f "${ROOT_DIR}"/.env ]]; then
+		log_info "Load secrets in '${ROOT_DIR}'"
+		source "${ROOT_DIR}"/.env
+	elif [[ -f "${AUTO_DIR}"/.env ]]; then
 		log_info "Load secrets in '${AUTO_DIR}'"
 		source "${AUTO_DIR}"/.env
 	elif [[ -f "${SECRETS_DIR}/.env" ]]; then
 		log_info "Load secrets in '${SECRETS_DIR}'"
 		source "${SECRETS_DIR}/.env"
 	else
-		log_warning "No secrets loaded"
+		log_warning "No secrets loaded, searched in [ ${ROOT_DIR}, ${AUTO_DIR}, ${SECRETS_DIR} ]"
 	fi
+	set +a
 }
 
 log() {
