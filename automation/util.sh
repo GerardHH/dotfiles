@@ -52,6 +52,11 @@ execute_scripts() {
 			continue
 		fi
 
+		if [[ "${script:0:1}" == "d" ]]; then
+			log_info "Skipping: disabled"
+			continue
+		fi
+
 		local output=$(bash "${script}" 2>&1)
 
 		if [[ "${output}" == *"${WARNING}:"* ]]; then
