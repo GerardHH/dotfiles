@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! command -v bw; then
-	log_error "Could not find bitwarden cli (bw), please install it or set PATH correctly"
+	echo "Could not find bitwarden cli (bw), please install it or set PATH correctly"
 	exit 1
 fi
 
