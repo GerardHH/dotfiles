@@ -1,17 +1,14 @@
 #!/bin/bash
 
-# Use subshell to protect parent environment.
-(
-	source "${HOME}"/dotfiles/automation/util.sh
+source "${HOME}"/dotfiles/automation/util.sh
 
-    if [[ -z "${AUTO_DIR}" ]]; then
-        echo "Error: AUTO_DIR not set"
-        exit 1
-    fi
+if [[ -z "${AUTO_DIR}" ]]; then
+	log_error "AUTO_DIR not set"
+	exit 1
+fi
 
-	SCRIPTS_DIR="${AUTO_DIR}"/validate
+SCRIPTS_DIR="${AUTO_DIR}"/validate
 
-	echo "----- Start validation -----"
-	execute_scripts "${SCRIPTS_DIR}"
-	echo "----- Finished validation -----"
-)
+log_info "----- Start validation -----"
+execute_scripts "${SCRIPTS_DIR}"
+log_info "----- Finished validation -----"

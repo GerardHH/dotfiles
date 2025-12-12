@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Allow dynamic sourcing in known locations
+# shellcheck disable=SC1090,SC1091
+
+# Sources
+source "$HOME"/dotfiles/automation/source_brew.sh
+CARGO="$HOME/.cargo/env"
+if [ -e "$CARGO" ]; then
+	source "$CARGO"
+fi
+
+# INFO If not running interactively, then only source and skip the rest
+[[ $- != *i* ]] && return
+
+# Completions
+source /etc/profile.d/bash_completion.sh
+
+if command -v brew >/dev/null 2>1 && [[ -d "$(brew --prefix)/etc/bash_completion.d" ]]; then
+	for f in "$(brew --prefix)"/etc/bash_completion.d/*; do
+		source "$f"
+	done
+fi
+
+source "$HOME/.config/bash/eza.sh"
+source "$HOME/.config/bash/fzf/fzf.sh"
+source "$HOME/.config/bash/history_config.sh"
+
+# Aliases
+alias ld='lazydocker'
+alias lg='lazygit'
+alias top='btop'
+alias vi='nvim'
+
+# Exports
+export EDITOR="nvim"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export NAVI_PATH="$HOME/.config/navi/cheats"
+
+# Start up executions
+oh-my-posh disable notice
+
+# Shell integrations
+eval "$(navi widget bash)"
+eval "$(zoxide init --cmd cd bash)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/theme.toml)"

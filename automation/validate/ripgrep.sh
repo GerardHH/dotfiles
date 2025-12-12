@@ -1,18 +1,14 @@
 #!/bin/bash
 
-if [[ -z "${AUTO_DIR}" ]]; then
-	echo "Error: AUTO_DIR not set"
-	exit 2
-fi
-
-source "${AUTO_DIR}/source_brew.sh"
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
 
 if ! command -v rgrep; then
-	echo "Error: Could not find ripgrep"
+	log_error "Could not find ripgrep"
 	exit 1
 fi
 
 if [[ ! -L "${HOME}/.config/ripgrep" ]]; then
-	echo "Error: ripgrep config not deployed"
+	log_error "ripgrep config not deployed"
 	exit 1
 fi

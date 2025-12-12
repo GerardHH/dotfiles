@@ -6,4 +6,4 @@ TARGET="${HOME}"/dotfiles
 
 git clone --branch "${BRANCH}" "${SOURCE}" "${TARGET}"
 
-"${TARGET}"/util/setup.sh
+"${TARGET}"/automation/setup.sh

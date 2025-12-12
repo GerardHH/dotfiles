@@ -1,60 +1,44 @@
 #!/bin/bash
 
+#shellcheck source=./automation/util.sh
+source "${HOME}"/dotfiles/automation/util.sh
+
 if ! command -v gpg; then
-	echo "Error: gpg command not found"
+	log_error "gpg command not found"
 	exit 1
 fi
 
 if [[ -z "$(gpg --list-secret-keys)" ]]; then
-	echo "Error: gpg doesn't have any private keys"
+	log_error "gpg doesn't have any private keys"
 	exit 1
 fi
 
-if [[ -z "${ROOT_DIR}" ]]; then
-	echo "Warning: ROOT_DIR not set"
-fi
-
-if [[ -f "${ROOT_DIR}"/.env ]]; then
-	source "${ROOT_DIR}"/.env
-fi
+load_secrets
 
 if [[ -z "${GPG_PASSPHRASE}" ]]; then
-	echo "Error: Empty GPG_PASSPHRASE, please set it securily"
+	log_error "Empty GPG_PASSPHRASE, please set it securily"
 	exit 1
 fi
 
-if [[ -z "${ROOT_DIR}" ]]; then
-	echo "Error: ROOT_DIR not set"
-	exit 1
-fi
+SOURCE_DIR="${ROOT_DIR}/home"
 
-SOURCE_DIR="${ROOT_DIR}/encrypted"
-TARGET_DIR="${ROOT_DIR}/home"
-
-echo "Source dir: ${SOURCE_DIR}"
-echo "Target dir: ${TARGET_DIR}"
+log_info "Source dir: ${SOURCE_DIR}"
 
 find "${SOURCE_DIR}" -type f -name "*.gpg" | while read -r file; do
 	rel_path="${file#"${SOURCE_DIR}"/}"
-	dest_path="${TARGET_DIR}/${rel_path}"
+	dest_path="${SOURCE_DIR}/${rel_path}"
 	dest_path="${dest_path%.gpg}"
 
-	echo "Decrypt: '${file}' into '${dest_path}'"
+	log_info "Decrypt: '${file}' into '${dest_path}'"
 
 	if [[ -f "${dest_path}" ]]; then
-		echo "Warning: Already exists, skipping"
+		log_warning "Already exists, skipping"
 		continue
 	fi
 
-	dest_dir=$(dirname "${dest_path}")
-	if [[ ! -d "${dest_dir}" ]]; then
-		echo "Warning: Parent directory doesn't exist, creating"
-		mkdir -p "${dest_dir}"
-	fi
-
 	if gpg --batch --yes --pinentry-mode loopback --passphrase "${GPG_PASSPHRASE}" --output "${dest_path}" --decrypt "${file}"; then
-		echo "Success!"
+		log_info "Success!"
 	else
-		echo "Warning: Failed to decrypt"
+		log_warning "Failed to decrypt"
 	fi
 done

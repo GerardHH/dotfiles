@@ -18,7 +18,7 @@ Install an emulator using the host package manager. Currently the ones that are 
 Download `bootstrap.sh` and execute. Use `automation/validate.sh` to see if the setup was successful.
 ## Secrets
 The decryption uses GPG and requires to have a `.env` file available with the correct secrets setup, use `util/setup_secrets.sh` which uses bitwarden to setup the file.
-Note that `GPG_PRIVATE_KEY` is encoded using `base64 --wrap=0` so that it can be passed around in environment variables.
+Note that `GPG_KEY_PRIVATE` is encoded using `base64 --wrap=0` so that it can be passed around in environment variables.
 # Whishlist
 * `automation/util.sh:execute_scripts`:
 - Better error reporting

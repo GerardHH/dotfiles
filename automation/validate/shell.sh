@@ -1,25 +1,49 @@
 #!/bin/bash
 
-if [[ -z "${AUTO_DIR}" ]]; then
-	echo "Error: AUTO_DIR not set"
-	exit 2
+#shellcheck source=./automation/util.sh
+source "${HOME}/dotfiles/automation/util.sh"
+
+DEPS=(
+	"eza"
+	"fzf"
+	"navi"
+	"oh-my-posh"
+	"tmux"
+	"zoxide"
+)
+
+MISSING=()
+
+for dep in "${DEPS[@]}"; do
+	if ! command -v "$dep"; then
+		MISSING+=("${dep}")
+	fi
+done
+
+if [ "${#MISSING[@]}" -gt 0 ]; then
+	log_error "The following dependencies are missing:"
+	printf '%s\n' "${MISSING[@]}"
+	exit 1
 fi
 
-source "${AUTO_DIR}/source_brew.sh"
-
-if ! command -v zsh; then
-    echo "Error: Could not find zsh"
-    exit 1
+if ! command -v bash; then
+	log_error "Could not find bash"
+	exit 1
 fi
 
-if [[ ! -L "${HOME}/.zshrc" ]]; then
-    echo "Error: .zshrc not deployed"
-    exit 1
+if [[ ! -L "${HOME}/.bashrc" ]]; then
+	log_error ".bashrc not deployed"
+	exit 1
 fi
 
-OUTPUT=$(zsh -c "source ${HOME}/.zshrc")
+if [[ ! -d "${HOME}/.config/bash/fzf/fzf-tab-completion" ]]; then
+	log_error "fzf-tab-completion not installed"
+	exit 1
+fi
+
+OUTPUT=$(bash-c "source ${HOME}/.bashrc")
 if [[ -n "${OUTPUT}" ]]; then
-    echo "Error: sourcing .zshrc gave output:"
-    echo "${OUTPUT}"
-    exit 1
+	log_error "sourcing .bashrc gave output:"
+	log_error "${OUTPUT}"
+	exit 1
 fi
