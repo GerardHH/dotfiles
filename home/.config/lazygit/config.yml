@@ -1,8 +1,8 @@
 git:
   branchLogCmd: 'git list-tree'
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never --tabs=4
+      command: delta --dark --paging=never --tabs=4
   allBranchesLogCmds:
     - git list-tree --all
 customCommands:
